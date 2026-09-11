@@ -95,18 +95,42 @@
 
         /* Animations */
         @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-12px) rotate(1deg); }
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-12px) rotate(1deg);
+            }
         }
 
         @keyframes pulseGlow {
-            0%, 100% { opacity: 0.4; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.05); }
+
+            0%,
+            100% {
+                opacity: 0.4;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.7;
+                transform: scale(1.05);
+            }
         }
 
-        .animate-float-slow { animation: float 6s ease-in-out infinite; }
-        .animate-float-delayed { animation: float 7s ease-in-out infinite 2s; }
-        .animate-pulse-glow { animation: pulseGlow 4s ease-in-out infinite; }
+        .animate-float-slow {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .animate-float-delayed {
+            animation: float 7s ease-in-out infinite 2s;
+        }
+
+        .animate-pulse-glow {
+            animation: pulseGlow 4s ease-in-out infinite;
+        }
 
         .reveal-on-scroll {
             opacity: 0;
@@ -122,112 +146,166 @@
     </style>
 </head>
 
-<body class="bg-slate-50 text-slate-900 font-sans antialiased min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
+<body
+    class="bg-slate-50 text-slate-900 font-sans antialiased min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
 
     <!-- Top Reading Progress Indicator -->
-    <div id="scrollProgress" class="fixed top-0 left-0 h-1 bg-gradient-to-r from-brand-600 via-indigo-600 to-emerald-500 z-50 transition-all duration-150" style="width: 0%;"></div>
+    <div id="scrollProgress"
+        class="fixed top-0 left-0 h-1 bg-gradient-to-r from-brand-600 via-indigo-600 to-emerald-500 z-50 transition-all duration-150"
+        style="width: 0%;"></div>
 
     <!-- Header Navigation -->
     <header class="sticky top-0 z-40 glass-header">
         <div class="max-w-7xl mx-auto px-4 lg:px-8 py-3.5 flex items-center justify-between">
             <!-- Brand Info -->
             <a href="index.html" class="flex items-center gap-3.5 group">
-                <div class="h-10 w-10 rounded-2xl bg-white shadow-sm border border-slate-200/80 p-1 flex items-center justify-center group-hover:scale-105 transition">
+                <div
+                    class="h-10 w-10 rounded-2xl bg-white shadow-sm border border-slate-200/80 p-1 flex items-center justify-center group-hover:scale-105 transition">
                     <img src="IMG_Logo.png" alt="ASTRAtech Logo" class="h-full w-full object-contain" />
                 </div>
                 <div>
-                    <span class="text-[11px] font-bold uppercase tracking-wider text-brand-600 block leading-none mb-1">Workshop Guide</span>
+                    <span
+                        class="text-[11px] font-bold uppercase tracking-wider text-brand-600 block leading-none mb-1">Workshop
+                        Guide</span>
                     <h1 class="text-base font-bold text-slate-900 tracking-tight">Agentic AI Applications</h1>
                 </div>
             </a>
 
             <!-- Desktop Nav Links -->
-            <nav class="hidden md:flex items-center gap-1 text-xs font-semibold text-slate-600 bg-slate-100/80 p-1.5 rounded-xl border border-slate-200/60">
+            <nav
+                class="hidden md:flex items-center gap-1 text-xs font-semibold text-slate-600 bg-slate-100/80 p-1.5 rounded-xl border border-slate-200/60">
                 <a href="index.html" class="px-3 py-1.5 rounded-lg bg-white text-brand-600 shadow-xs">Beranda</a>
-                <a href="setup.html" class="px-3 py-1.5 rounded-lg hover:text-brand-600 hover:bg-white transition duration-200">Setup &amp; Instalasi</a>
-                <a href="lab1.html" class="px-3 py-1.5 rounded-lg hover:text-brand-600 hover:bg-white transition duration-200">Lab 1: Model</a>
-                <a href="lab2.html" class="px-3 py-1.5 rounded-lg hover:text-brand-600 hover:bg-white transition duration-200">Lab 2: Search</a>
-                <a href="lab3.html" class="px-3 py-1.5 rounded-lg hover:text-brand-600 hover:bg-white transition duration-200">Lab 3: Custom Tool</a>
-                <a href="lab4.html" class="px-3 py-1.5 rounded-lg hover:text-indigo-600 hover:bg-white transition duration-200 text-indigo-700 font-bold">Lab 4: Full-Stack</a>
-                <a href="troubleshooting.html" class="px-3 py-1.5 rounded-lg hover:text-amber-700 hover:bg-white transition duration-200 text-amber-700">Solusi Error</a>
+                <a href="setup.html"
+                    class="px-3 py-1.5 rounded-lg hover:text-brand-600 hover:bg-white transition duration-200">Setup
+                    &amp; Instalasi</a>
+                <a href="lab1.html"
+                    class="px-3 py-1.5 rounded-lg hover:text-brand-600 hover:bg-white transition duration-200">Lab 1:
+                    Model</a>
+                <a href="lab2.html"
+                    class="px-3 py-1.5 rounded-lg hover:text-brand-600 hover:bg-white transition duration-200">Lab 2:
+                    Search</a>
+                <a href="lab3.html"
+                    class="px-3 py-1.5 rounded-lg hover:text-brand-600 hover:bg-white transition duration-200">Lab 3:
+                    Custom Tool</a>
+                <a href="lab4.html"
+                    class="px-3 py-1.5 rounded-lg hover:text-indigo-600 hover:bg-white transition duration-200 text-indigo-700 font-bold">Lab
+                    4: Full-Stack</a>
+                <a href="troubleshooting.html"
+                    class="px-3 py-1.5 rounded-lg hover:text-amber-700 hover:bg-white transition duration-200 text-amber-700">Solusi
+                    Error</a>
             </nav>
 
             <!-- Actions -->
             <div class="flex items-center gap-2">
-                <button onclick="openModal('downloadModal')" class="flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 shadow-sm transition transform hover:-translate-y-0.5">
+                <button onclick="openModal('downloadModal')"
+                    class="flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 shadow-sm transition transform hover:-translate-y-0.5">
                     <i data-lucide="download" class="w-3.5 h-3.5 text-slate-500"></i>
                     <span class="hidden sm:inline">Export Script</span>
                 </button>
-                <a href="#interactive-simulator" class="flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-xl bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-700 hover:to-indigo-700 text-white shadow-md shadow-brand-500/20 transition transform hover:-translate-y-0.5">
+                <a href="#interactive-simulator"
+                    class="flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-xl bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-700 hover:to-indigo-700 text-white shadow-md shadow-brand-500/20 transition transform hover:-translate-y-0.5">
                     <i data-lucide="play" class="w-3.5 h-3.5"></i>
                     <span>Coba Simulator</span>
                 </a>
-                <button id="mobileMenuBtn" class="md:hidden p-2 rounded-xl bg-slate-100 text-slate-600 hover:text-slate-900 border border-slate-200">
+                <button id="mobileMenuBtn"
+                    class="md:hidden p-2 rounded-xl bg-slate-100 text-slate-600 hover:text-slate-900 border border-slate-200">
                     <i data-lucide="menu" class="w-5 h-5"></i>
                 </button>
             </div>
         </div>
 
         <!-- Mobile Drawer -->
-        <div id="mobileDrawer" class="hidden md:hidden pt-4 pb-2 border-t border-slate-200 mt-2 space-y-1 bg-white rounded-2xl p-3 shadow-lg mx-4">
-            <a href="index.html" class="block px-3 py-2 rounded-lg text-sm bg-brand-50 text-brand-600 font-bold">Beranda Portal</a>
-            <a href="setup.html" class="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50">1. Setup &amp; Instalasi Python</a>
-            <a href="lab1.html" class="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50">2. Lab 1: Fondasi Agentic AI</a>
-            <a href="lab2.html" class="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50">3. Lab 2: Web Browsing Agent</a>
-            <a href="lab3.html" class="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50">4. Lab 3: Custom Tools @tool</a>
-            <a href="lab4.html" class="block px-3 py-2 rounded-lg text-sm text-indigo-700 font-bold hover:bg-indigo-50">5. Lab 4: Full-Stack &amp; MS Word</a>
-            <a href="troubleshooting.html" class="block px-3 py-2 rounded-lg text-sm text-amber-700 hover:bg-amber-50">6. Solusi &amp; Troubleshooting</a>
+        <div id="mobileDrawer"
+            class="hidden md:hidden pt-4 pb-2 border-t border-slate-200 mt-2 space-y-1 bg-white rounded-2xl p-3 shadow-lg mx-4">
+            <a href="index.html" class="block px-3 py-2 rounded-lg text-sm bg-brand-50 text-brand-600 font-bold">Beranda
+                Portal</a>
+            <a href="setup.html" class="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50">1. Setup
+                &amp; Instalasi Python</a>
+            <a href="lab1.html" class="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50">2. Lab 1:
+                Fondasi Agentic AI</a>
+            <a href="lab2.html" class="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50">3. Lab 2:
+                Web Browsing Agent</a>
+            <a href="lab3.html" class="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50">4. Lab 3:
+                Custom Tools @tool</a>
+            <a href="lab4.html"
+                class="block px-3 py-2 rounded-lg text-sm text-indigo-700 font-bold hover:bg-indigo-50">5. Lab 4:
+                Full-Stack &amp; MS Word</a>
+            <a href="troubleshooting.html"
+                class="block px-3 py-2 rounded-lg text-sm text-amber-700 hover:bg-amber-50">6. Solusi &amp;
+                Troubleshooting</a>
         </div>
     </header>
 
     <main class="flex-grow">
         <!-- Hero Section -->
-        <section class="relative overflow-hidden pt-12 pb-16 lg:pt-20 lg:pb-24 border-b border-slate-200/80 bg-gradient-to-b from-white via-slate-50 to-slate-50">
+        <section
+            class="relative overflow-hidden pt-12 pb-16 lg:pt-20 lg:pb-24 border-b border-slate-200/80 bg-gradient-to-b from-white via-slate-50 to-slate-50">
             <!-- Background Ambient Glows -->
-            <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[700px] h-[380px] bg-indigo-100/60 blur-[120px] rounded-full pointer-events-none -z-10 animate-pulse-glow"></div>
-            <div class="absolute top-1/3 right-10 w-[450px] h-[320px] bg-blue-100/60 blur-[110px] rounded-full pointer-events-none -z-10 animate-float-slow"></div>
-            <div class="absolute top-1/4 left-10 w-[400px] h-[280px] bg-emerald-100/50 blur-[100px] rounded-full pointer-events-none -z-10 animate-float-delayed"></div>
+            <div
+                class="absolute -top-24 left-1/2 -translate-x-1/2 w-[700px] h-[380px] bg-indigo-100/60 blur-[120px] rounded-full pointer-events-none -z-10 animate-pulse-glow">
+            </div>
+            <div
+                class="absolute top-1/3 right-10 w-[450px] h-[320px] bg-blue-100/60 blur-[110px] rounded-full pointer-events-none -z-10 animate-float-slow">
+            </div>
+            <div
+                class="absolute top-1/4 left-10 w-[400px] h-[280px] bg-emerald-100/50 blur-[100px] rounded-full pointer-events-none -z-10 animate-float-delayed">
+            </div>
 
             <div class="max-w-7xl mx-auto px-4 lg:px-8">
                 <div class="text-center max-w-3xl mx-auto reveal-on-scroll">
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-200/80 text-indigo-700 text-xs font-bold mb-6 shadow-sm transform hover:scale-105 transition">
+                    <div
+                        class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-200/80 text-indigo-700 text-xs font-bold mb-6 shadow-sm transform hover:scale-105 transition">
                         <span class="w-2 h-2 rounded-full bg-indigo-500 animate-ping"></span>
                         Panduan Lengkap Praktik Hands-On Workshop
                     </div>
-                    <h2 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-slate-900 mb-6">
+                    <h2
+                        class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-slate-900 mb-6">
                         Membangun Aplikasi <br class="hidden sm:block" />
                         <span class="gradient-text-hero">Agentic AI Modern</span>
                     </h2>
                     <p class="text-slate-600 text-base sm:text-lg mb-8 leading-relaxed font-normal max-w-2xl mx-auto">
-                        Pelajari langkah demi langkah dari konsep dasar <span class="text-slate-900 font-semibold bg-slate-200/60 px-1.5 py-0.5 rounded">ReAct (Reason + Act)</span>, Web Grounding, pembuatan <span class="text-slate-900 font-semibold bg-slate-200/60 px-1.5 py-0.5 rounded">Custom Tools</span>, hingga otomatisasi desktop <span class="text-slate-900 font-semibold bg-slate-200/60 px-1.5 py-0.5 rounded">Microsoft Word</span> lewat Full-Stack Web Application.
+                        Pelajari langkah demi langkah dari konsep dasar <span
+                            class="text-slate-900 font-semibold bg-slate-200/60 px-1.5 py-0.5 rounded">ReAct (Reason +
+                            Act)</span>, Web Grounding, pembuatan <span
+                            class="text-slate-900 font-semibold bg-slate-200/60 px-1.5 py-0.5 rounded">Custom
+                            Tools</span>, hingga otomatisasi desktop <span
+                            class="text-slate-900 font-semibold bg-slate-200/60 px-1.5 py-0.5 rounded">Microsoft
+                            Word</span> lewat Full-Stack Web Application.
                     </p>
 
                     <!-- Tech Stack Badges -->
                     <div class="flex flex-wrap items-center justify-center gap-2.5 mb-10 text-xs text-slate-700">
-                        <span class="px-3 py-1.5 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center gap-1.5 font-medium hover:border-emerald-300 transition">
+                        <span
+                            class="px-3 py-1.5 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center gap-1.5 font-medium hover:border-emerald-300 transition">
                             <i data-lucide="code-2" class="w-4 h-4 text-emerald-600"></i> Python 3.10+
                         </span>
-                        <span class="px-3 py-1.5 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center gap-1.5 font-medium hover:border-amber-300 transition">
+                        <span
+                            class="px-3 py-1.5 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center gap-1.5 font-medium hover:border-amber-300 transition">
                             <i data-lucide="cpu" class="w-4 h-4 text-amber-600"></i> smolagents (HuggingFace)
                         </span>
-                        <span class="px-3 py-1.5 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center gap-1.5 font-medium hover:border-indigo-300 transition">
+                        <span
+                            class="px-3 py-1.5 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center gap-1.5 font-medium hover:border-indigo-300 transition">
                             <i data-lucide="sparkles" class="w-4 h-4 text-indigo-600"></i> Gemini 3.6 Flash (AI Studio)
                         </span>
-                        <span class="px-3 py-1.5 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center gap-1.5 font-medium hover:border-blue-300 transition">
+                        <span
+                            class="px-3 py-1.5 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center gap-1.5 font-medium hover:border-blue-300 transition">
                             <i data-lucide="globe" class="w-4 h-4 text-blue-600"></i> Flask + REST API
                         </span>
-                        <span class="px-3 py-1.5 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center gap-1.5 font-medium hover:border-purple-300 transition">
+                        <span
+                            class="px-3 py-1.5 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center gap-1.5 font-medium hover:border-purple-300 transition">
                             <i data-lucide="file-text" class="w-4 h-4 text-purple-600"></i> PyAutoGUI &amp; Pyperclip
                         </span>
                     </div>
 
                     <!-- CTA Buttons -->
                     <div class="flex flex-wrap justify-center items-center gap-4">
-                        <a href="setup.html" class="px-6 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm shadow-md shadow-brand-500/25 flex items-center gap-2 transition transform hover:-translate-y-0.5">
+                        <a href="setup.html"
+                            class="px-6 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm shadow-md shadow-brand-500/25 flex items-center gap-2 transition transform hover:-translate-y-0.5">
                             <i data-lucide="wrench" class="w-4 h-4"></i>
                             Panduan Setup &amp; Instalasi
                         </a>
-                        <a href="lab1.html" class="px-6 py-3.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-semibold text-sm shadow-sm flex items-center gap-2 transition transform hover:-translate-y-0.5">
+                        <a href="lab1.html"
+                            class="px-6 py-3.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-semibold text-sm shadow-sm flex items-center gap-2 transition transform hover:-translate-y-0.5">
                             <i data-lucide="arrow-right-circle" class="w-4 h-4 text-brand-600"></i>
                             Langsung ke Lab 1
                         </a>
@@ -237,11 +315,14 @@
                 <!-- Curriculum Cards Overview (Multi-page Gateway) -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-16 reveal-on-scroll">
                     <!-- Card Setup -->
-                    <a href="setup.html" class="light-card p-6 rounded-2xl group relative overflow-hidden flex flex-col justify-between border-blue-200/60 hover:border-brand-500">
+                    <a href="setup.html"
+                        class="light-card p-6 rounded-2xl group relative overflow-hidden flex flex-col justify-between border-blue-200/60 hover:border-brand-500">
                         <div>
                             <div class="flex items-center justify-between mb-3">
-                                <span class="text-[11px] font-bold uppercase tracking-wider text-blue-700 bg-blue-50 border border-blue-200/60 px-2.5 py-0.5 rounded-full">Persiapan</span>
-                                <div class="p-2.5 rounded-xl bg-blue-50 text-blue-600 group-hover:scale-110 transition duration-300">
+                                <span
+                                    class="text-[11px] font-bold uppercase tracking-wider text-blue-700 bg-blue-50 border border-blue-200/60 px-2.5 py-0.5 rounded-full">Persiapan</span>
+                                <div
+                                    class="p-2.5 rounded-xl bg-blue-50 text-blue-600 group-hover:scale-110 transition duration-300">
                                     <i data-lucide="terminal" class="w-5 h-5"></i>
                                 </div>
                             </div>
@@ -249,20 +330,26 @@
                                 Setup Python &amp; Environment
                             </h3>
                             <p class="text-xs text-slate-600 leading-relaxed">
-                                Panduan instalasi Python multi-OS (Windows, Mac, Linux), isolasi Virtual Environment (venv), instalasi dependensi, dan konfigurasi API key Google AI Studio (.env).
+                                Panduan instalasi Python multi-OS (Windows, Mac, Linux), isolasi Virtual Environment
+                                (venv), instalasi dependensi, dan konfigurasi API key Google AI Studio (.env).
                             </p>
                         </div>
-                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center text-xs font-bold text-blue-600 gap-1 group-hover:translate-x-1 transition">
+                        <div
+                            class="mt-4 pt-3 border-t border-slate-100 flex items-center text-xs font-bold text-blue-600 gap-1 group-hover:translate-x-1 transition">
                             Buka Panduan Setup <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                         </div>
                     </a>
 
                     <!-- Card Lab 1 -->
-                    <a href="lab1.html" class="light-card p-6 rounded-2xl group relative overflow-hidden flex flex-col justify-between border-brand-200/60 hover:border-brand-500">
+                    <a href="lab1.html"
+                        class="light-card p-6 rounded-2xl group relative overflow-hidden flex flex-col justify-between border-brand-200/60 hover:border-brand-500">
                         <div>
                             <div class="flex items-center justify-between mb-3">
-                                <span class="text-[11px] font-bold uppercase tracking-wider text-brand-600 bg-brand-50 border border-brand-200/60 px-2.5 py-0.5 rounded-full">Modul 1</span>
-                                <div class="p-2.5 rounded-xl bg-brand-50 text-brand-600 group-hover:scale-110 transition duration-300">
+                                <span
+                                    class="text-[11px] font-bold uppercase tracking-wider text-brand-600 bg-brand-50 border border-brand-200/60 px-2.5 py-0.5 rounded-full">Modul
+                                    1</span>
+                                <div
+                                    class="p-2.5 rounded-xl bg-brand-50 text-brand-600 group-hover:scale-110 transition duration-300">
                                     <i data-lucide="cpu" class="w-5 h-5"></i>
                                 </div>
                             </div>
@@ -270,20 +357,26 @@
                                 Fondasi Agentic AI
                             </h3>
                             <p class="text-xs text-slate-600 leading-relaxed">
-                                Memahami perbedaan LLM Tradisional vs Siklus ReAct (Reason + Act). Menghubungkan smolagents ke Google Gemini 3.6 Flash via OpenAI Server adapter dan tes koneksi.
+                                Memahami perbedaan LLM Tradisional vs Siklus ReAct (Reason + Act). Menghubungkan
+                                smolagents ke Google Gemini 3.6 Flash via OpenAI Server adapter dan tes koneksi.
                             </p>
                         </div>
-                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center text-xs font-bold text-brand-600 gap-1 group-hover:translate-x-1 transition">
+                        <div
+                            class="mt-4 pt-3 border-t border-slate-100 flex items-center text-xs font-bold text-brand-600 gap-1 group-hover:translate-x-1 transition">
                             Mulai Lab 1 <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                         </div>
                     </a>
 
                     <!-- Card Lab 2 -->
-                    <a href="lab2.html" class="light-card p-6 rounded-2xl group relative overflow-hidden flex flex-col justify-between border-cyan-200/60 hover:border-cyan-500">
+                    <a href="lab2.html"
+                        class="light-card p-6 rounded-2xl group relative overflow-hidden flex flex-col justify-between border-cyan-200/60 hover:border-cyan-500">
                         <div>
                             <div class="flex items-center justify-between mb-3">
-                                <span class="text-[11px] font-bold uppercase tracking-wider text-cyan-700 bg-cyan-50 border border-cyan-200/60 px-2.5 py-0.5 rounded-full">Modul 2</span>
-                                <div class="p-2.5 rounded-xl bg-cyan-50 text-cyan-600 group-hover:scale-110 transition duration-300">
+                                <span
+                                    class="text-[11px] font-bold uppercase tracking-wider text-cyan-700 bg-cyan-50 border border-cyan-200/60 px-2.5 py-0.5 rounded-full">Modul
+                                    2</span>
+                                <div
+                                    class="p-2.5 rounded-xl bg-cyan-50 text-cyan-600 group-hover:scale-110 transition duration-300">
                                     <i data-lucide="search" class="w-5 h-5"></i>
                                 </div>
                             </div>
@@ -291,20 +384,26 @@
                                 Agentic Web Search
                             </h3>
                             <p class="text-xs text-slate-600 leading-relaxed">
-                                Pencarian internet live menggunakan DuckDuckGoSearchTool untuk mengatasi batas waktu pengetahuan model LLM, digabungkan dengan penalaran kalkulasi dinamis.
+                                Pencarian internet live menggunakan DuckDuckGoSearchTool untuk mengatasi batas waktu
+                                pengetahuan model LLM, digabungkan dengan penalaran kalkulasi dinamis.
                             </p>
                         </div>
-                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center text-xs font-bold text-cyan-700 gap-1 group-hover:translate-x-1 transition">
+                        <div
+                            class="mt-4 pt-3 border-t border-slate-100 flex items-center text-xs font-bold text-cyan-700 gap-1 group-hover:translate-x-1 transition">
                             Mulai Lab 2 <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                         </div>
                     </a>
 
                     <!-- Card Lab 3 -->
-                    <a href="lab3.html" class="light-card p-6 rounded-2xl group relative overflow-hidden flex flex-col justify-between border-emerald-200/60 hover:border-emerald-500">
+                    <a href="lab3.html"
+                        class="light-card p-6 rounded-2xl group relative overflow-hidden flex flex-col justify-between border-emerald-200/60 hover:border-emerald-500">
                         <div>
                             <div class="flex items-center justify-between mb-3">
-                                <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 border border-emerald-200/60 px-2.5 py-0.5 rounded-full">Modul 3</span>
-                                <div class="p-2.5 rounded-xl bg-emerald-50 text-emerald-600 group-hover:scale-110 transition duration-300">
+                                <span
+                                    class="text-[11px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 border border-emerald-200/60 px-2.5 py-0.5 rounded-full">Modul
+                                    3</span>
+                                <div
+                                    class="p-2.5 rounded-xl bg-emerald-50 text-emerald-600 group-hover:scale-110 transition duration-300">
                                     <i data-lucide="wrench" class="w-5 h-5"></i>
                                 </div>
                             </div>
@@ -312,20 +411,27 @@
                                 Custom Tools (@tool)
                             </h3>
                             <p class="text-xs text-slate-600 leading-relaxed">
-                                Ubah fungsi Python native menjadi alat otonom bagi LLM menggunakan dekorator <code>@tool</code>, type hint ketat, docstrings Google-style, dan manajemen file I/O lokal.
+                                Ubah fungsi Python native menjadi alat otonom bagi LLM menggunakan dekorator
+                                <code>@tool</code>, type hint ketat, docstrings Google-style, dan manajemen file I/O
+                                lokal.
                             </p>
                         </div>
-                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center text-xs font-bold text-emerald-700 gap-1 group-hover:translate-x-1 transition">
+                        <div
+                            class="mt-4 pt-3 border-t border-slate-100 flex items-center text-xs font-bold text-emerald-700 gap-1 group-hover:translate-x-1 transition">
                             Mulai Lab 3 <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                         </div>
                     </a>
 
                     <!-- Card Lab 4 -->
-                    <a href="lab4.html" class="light-card p-6 rounded-2xl group relative overflow-hidden flex flex-col justify-between border-indigo-200/80 bg-gradient-to-b from-white to-indigo-50/30 hover:border-indigo-500">
+                    <a href="lab4.html"
+                        class="light-card p-6 rounded-2xl group relative overflow-hidden flex flex-col justify-between border-indigo-200/80 bg-gradient-to-b from-white to-indigo-50/30 hover:border-indigo-500">
                         <div>
                             <div class="flex items-center justify-between mb-3">
-                                <span class="text-[11px] font-bold uppercase tracking-wider text-indigo-700 bg-indigo-50 border border-indigo-200/80 px-2.5 py-0.5 rounded-full">Modul 4 (Puncak)</span>
-                                <div class="p-2.5 rounded-xl bg-indigo-50 text-indigo-600 group-hover:scale-110 transition duration-300">
+                                <span
+                                    class="text-[11px] font-bold uppercase tracking-wider text-indigo-700 bg-indigo-50 border border-indigo-200/80 px-2.5 py-0.5 rounded-full">Modul
+                                    4 (Puncak)</span>
+                                <div
+                                    class="p-2.5 rounded-xl bg-indigo-50 text-indigo-600 group-hover:scale-110 transition duration-300">
                                     <i data-lucide="app-window" class="w-5 h-5"></i>
                                 </div>
                             </div>
@@ -333,20 +439,26 @@
                                 Full-Stack &amp; Word Bot
                             </h3>
                             <p class="text-xs text-slate-600 leading-relaxed">
-                                Memadukan Backend Flask REST API, Light Web UI modern, dan otomatisasi Robotic Process Automation (RPA) pengetikan ke Microsoft Word desktop via PyAutoGUI &amp; Pyperclip.
+                                Memadukan Backend Flask REST API, Light Web UI modern, dan otomatisasi Robotic Process
+                                Automation (RPA) pengetikan ke Microsoft Word desktop via PyAutoGUI &amp; Pyperclip.
                             </p>
                         </div>
-                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center text-xs font-bold text-indigo-600 gap-1 group-hover:translate-x-1 transition">
+                        <div
+                            class="mt-4 pt-3 border-t border-slate-100 flex items-center text-xs font-bold text-indigo-600 gap-1 group-hover:translate-x-1 transition">
                             Mulai Lab 4 <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                         </div>
                     </a>
 
                     <!-- Card Troubleshooting -->
-                    <a href="troubleshooting.html" class="light-card p-6 rounded-2xl group relative overflow-hidden flex flex-col justify-between border-amber-200/60 hover:border-amber-500">
+                    <a href="troubleshooting.html"
+                        class="light-card p-6 rounded-2xl group relative overflow-hidden flex flex-col justify-between border-amber-200/60 hover:border-amber-500">
                         <div>
                             <div class="flex items-center justify-between mb-3">
-                                <span class="text-[11px] font-bold uppercase tracking-wider text-amber-800 bg-amber-50 border border-amber-200/60 px-2.5 py-0.5 rounded-full">Solusi Error</span>
-                                <div class="p-2.5 rounded-xl bg-amber-50 text-amber-700 group-hover:scale-110 transition duration-300">
+                                <span
+                                    class="text-[11px] font-bold uppercase tracking-wider text-amber-800 bg-amber-50 border border-amber-200/60 px-2.5 py-0.5 rounded-full">Solusi
+                                    Error</span>
+                                <div
+                                    class="p-2.5 rounded-xl bg-amber-50 text-amber-700 group-hover:scale-110 transition duration-300">
                                     <i data-lucide="shield-alert" class="w-5 h-5"></i>
                                 </div>
                             </div>
@@ -354,10 +466,12 @@
                                 Solusi &amp; Troubleshooting
                             </h3>
                             <p class="text-xs text-slate-600 leading-relaxed">
-                                Panduan penanganan masalah nyata: PyAutoGUI failsafe, teks Indonesia hilang di Word, PowerShell execution policy restriction, port conflict, dan kuota Google AI Studio.
+                                Panduan penanganan masalah nyata: PyAutoGUI failsafe, teks Indonesia hilang di Word,
+                                PowerShell execution policy restriction, port conflict, dan kuota Google AI Studio.
                             </p>
                         </div>
-                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center text-xs font-bold text-amber-700 gap-1 group-hover:translate-x-1 transition">
+                        <div
+                            class="mt-4 pt-3 border-t border-slate-100 flex items-center text-xs font-bold text-amber-700 gap-1 group-hover:translate-x-1 transition">
                             Buka Solusi Error <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                         </div>
                     </a>
@@ -367,18 +481,23 @@
 
         <!-- Interactive Live Simulator on Landing Page -->
         <section id="interactive-simulator" class="py-16 max-w-7xl mx-auto px-4 lg:px-8 reveal-on-scroll">
-            <div class="light-card p-6 sm:p-8 rounded-3xl border-indigo-200/80 shadow-lg relative bg-gradient-to-b from-white via-white to-indigo-50/20">
+            <div
+                class="light-card p-6 sm:p-8 rounded-3xl border-indigo-200/80 shadow-lg relative bg-gradient-to-b from-white via-white to-indigo-50/20">
                 <div class="flex items-center justify-between flex-wrap gap-3 mb-6 pb-4 border-b border-slate-200">
                     <div>
-                        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-bold mb-1">
+                        <div
+                            class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-bold mb-1">
                             <i data-lucide="play" class="w-3.5 h-3.5"></i> Live Interactive Sandbox
                         </div>
-                        <h3 class="text-xl font-bold text-slate-900">Uji Coba Simulator Agentic AI Langsung di Browser</h3>
-                        <p class="text-xs text-slate-600">Eksplorasi cara kerja reasoning, web browsing, pemanggilan fungsi, dan simulasi pengetikan ke Microsoft Word.</p>
+                        <h3 class="text-xl font-bold text-slate-900">Uji Coba Simulator Agentic AI Langsung di Browser
+                        </h3>
+                        <p class="text-xs text-slate-600">Eksplorasi cara kerja reasoning, web browsing, pemanggilan
+                            fungsi, dan simulasi pengetikan ke Microsoft Word.</p>
                     </div>
                     <div class="flex items-center gap-2 text-xs">
                         <span class="flex h-2.5 w-2.5 relative">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                             <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
                         </span>
                         <span class="text-emerald-700 font-mono font-bold">Virtual Agent Ready</span>
@@ -388,24 +507,30 @@
                 <div class="bg-slate-50/90 rounded-2xl p-4 sm:p-6 border border-slate-200 shadow-inner">
                     <div class="text-center mb-6">
                         <h4 class="text-xl font-extrabold text-slate-900">Agentic AI Assistant</h4>
-                        <p class="text-xs text-slate-500 mt-1">Powered by Smolagents &amp; Google Gemini (Interactive Sandbox)</p>
+                        <p class="text-xs text-slate-500 mt-1">Powered by Smolagents &amp; Google Gemini (Interactive
+                            Sandbox)</p>
                     </div>
 
                     <!-- Mode Selector -->
                     <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 mb-4" id="simModeButtons">
-                        <button onclick="setSimMode('full', this)" class="sim-mode-btn active px-3 py-2.5 rounded-xl text-xs font-bold bg-brand-600 text-white shadow-sm flex items-center justify-center gap-1.5 transition">
+                        <button onclick="setSimMode('full', this)"
+                            class="sim-mode-btn active px-3 py-2.5 rounded-xl text-xs font-bold bg-brand-600 text-white shadow-sm flex items-center justify-center gap-1.5 transition">
                             🚀 Full Research
                         </button>
-                        <button onclick="setSimMode('word', this)" class="sim-mode-btn px-3 py-2.5 rounded-xl text-xs font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition flex items-center justify-center gap-1.5">
+                        <button onclick="setSimMode('word', this)"
+                            class="sim-mode-btn px-3 py-2.5 rounded-xl text-xs font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition flex items-center justify-center gap-1.5">
                             📄 Auto Word
                         </button>
-                        <button onclick="setSimMode('search', this)" class="sim-mode-btn px-3 py-2.5 rounded-xl text-xs font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition flex items-center justify-center gap-1.5">
+                        <button onclick="setSimMode('search', this)"
+                            class="sim-mode-btn px-3 py-2.5 rounded-xl text-xs font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition flex items-center justify-center gap-1.5">
                             🌐 Web Search
                         </button>
-                        <button onclick="setSimMode('custom', this)" class="sim-mode-btn px-3 py-2.5 rounded-xl text-xs font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition flex items-center justify-center gap-1.5">
+                        <button onclick="setSimMode('custom', this)"
+                            class="sim-mode-btn px-3 py-2.5 rounded-xl text-xs font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition flex items-center justify-center gap-1.5">
                             📝 Catatan
                         </button>
-                        <button onclick="setSimMode('math', this)" class="sim-mode-btn col-span-2 sm:col-span-1 px-3 py-2.5 rounded-xl text-xs font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition flex items-center justify-center gap-1.5">
+                        <button onclick="setSimMode('math', this)"
+                            class="sim-mode-btn col-span-2 sm:col-span-1 px-3 py-2.5 rounded-xl text-xs font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition flex items-center justify-center gap-1.5">
                             🔢 Kalkulator
                         </button>
                     </div>
@@ -413,21 +538,30 @@
                     <!-- Preset Prompts -->
                     <div class="flex items-center gap-2 overflow-x-auto pb-2 mb-3 text-xs">
                         <span class="text-slate-500 flex-shrink-0 font-semibold text-[11px]">Contoh prompt:</span>
-                        <button onclick="applyPreset('Berapa harga emas 24 karat hari ini dan berapa jika beli 10 gram?', 'full')" class="whitespace-nowrap bg-white hover:bg-slate-100 text-slate-700 px-2.5 py-1 rounded-lg border border-slate-200 transition font-medium shadow-2xs">
+                        <button
+                            onclick="applyPreset('Berapa harga emas 24 karat hari ini dan berapa jika beli 10 gram?', 'full')"
+                            class="whitespace-nowrap bg-white hover:bg-slate-100 text-slate-700 px-2.5 py-1 rounded-lg border border-slate-200 transition font-medium shadow-2xs">
                             Emas + Hitung (Full)
                         </button>
-                        <button onclick="applyPreset('Tulis ringkasan 2 paragraf tentang revolusi Agentic AI di industri dan ketik ke MS Word', 'word')" class="whitespace-nowrap bg-white hover:bg-slate-100 text-slate-700 px-2.5 py-1 rounded-lg border border-slate-200 transition font-medium shadow-2xs">
+                        <button
+                            onclick="applyPreset('Tulis ringkasan 2 paragraf tentang revolusi Agentic AI di industri dan ketik ke MS Word', 'word')"
+                            class="whitespace-nowrap bg-white hover:bg-slate-100 text-slate-700 px-2.5 py-1 rounded-lg border border-slate-200 transition font-medium shadow-2xs">
                             Esai ke MS Word
                         </button>
-                        <button onclick="applyPreset('Jam berapa sekarang? Simpan ke notes.txt bahwa saya menyelesaikan Lab 4.', 'custom')" class="whitespace-nowrap bg-white hover:bg-slate-100 text-slate-700 px-2.5 py-1 rounded-lg border border-slate-200 transition font-medium shadow-2xs">
+                        <button
+                            onclick="applyPreset('Jam berapa sekarang? Simpan ke notes.txt bahwa saya menyelesaikan Lab 4.', 'custom')"
+                            class="whitespace-nowrap bg-white hover:bg-slate-100 text-slate-700 px-2.5 py-1 rounded-lg border border-slate-200 transition font-medium shadow-2xs">
                             Jam + Simpan Catatan
                         </button>
                     </div>
 
                     <!-- Input Box -->
                     <div class="flex flex-col sm:flex-row gap-2.5 mb-4">
-                        <textarea id="simPromptInput" rows="2" placeholder="Ketikkan perintah Anda di sini... atau pilih salah satu contoh prompt di atas" class="w-full bg-white border border-slate-300 rounded-xl p-3 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition resize-none shadow-2xs"></textarea>
-                        <button id="simSubmitBtn" onclick="runSimulatedAgent()" class="sm:w-28 bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs rounded-xl px-4 py-3 sm:py-0 transition flex items-center justify-center gap-1.5 shadow-md shadow-brand-500/20 flex-shrink-0">
+                        <textarea id="simPromptInput" rows="2"
+                            placeholder="Ketikkan perintah Anda di sini... atau pilih salah satu contoh prompt di atas"
+                            class="w-full bg-white border border-slate-300 rounded-xl p-3 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition resize-none shadow-2xs"></textarea>
+                        <button id="simSubmitBtn" onclick="runSimulatedAgent()"
+                            class="sm:w-28 bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs rounded-xl px-4 py-3 sm:py-0 transition flex items-center justify-center gap-1.5 shadow-md shadow-brand-500/20 flex-shrink-0">
                             <i data-lucide="send" class="w-3.5 h-3.5"></i>
                             <span>Kirim</span>
                         </button>
@@ -435,9 +569,11 @@
 
                     <!-- Loading -->
                     <div id="simLoading" class="hidden py-4 text-center">
-                        <div class="inline-flex items-center gap-2 text-xs font-bold text-indigo-700 bg-indigo-50 px-4 py-2 rounded-full border border-indigo-200 shadow-sm">
+                        <div
+                            class="inline-flex items-center gap-2 text-xs font-bold text-indigo-700 bg-indigo-50 px-4 py-2 rounded-full border border-indigo-200 shadow-sm">
                             <span class="w-2.5 h-2.5 rounded-full bg-indigo-600 animate-ping"></span>
-                            <span id="simLoadingText">Agent sedang berpikir, memanggil tool &amp; melakukan reasoning...</span>
+                            <span id="simLoadingText">Agent sedang berpikir, memanggil tool &amp; melakukan
+                                reasoning...</span>
                         </div>
                     </div>
 
@@ -445,24 +581,33 @@
                     <div id="simResultWrapper" class="space-y-3 mt-4 hidden">
                         <div class="bg-white border border-indigo-200/80 rounded-xl p-4 shadow-sm">
                             <div class="flex items-center justify-between mb-2">
-                                <span class="text-[11px] font-bold uppercase tracking-wider text-indigo-700 flex items-center gap-1.5" id="simResultModeTitle">
+                                <span
+                                    class="text-[11px] font-bold uppercase tracking-wider text-indigo-700 flex items-center gap-1.5"
+                                    id="simResultModeTitle">
                                     <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> HASIL UTAMA
                                 </span>
-                                <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Status: OK 200</span>
+                                <span
+                                    class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Status:
+                                    OK 200</span>
                             </div>
-                            <div id="simResultText" class="text-xs text-slate-800 whitespace-pre-line leading-relaxed font-sans"></div>
+                            <div id="simResultText"
+                                class="text-xs text-slate-800 whitespace-pre-line leading-relaxed font-sans"></div>
                         </div>
 
                         <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 shadow-inner">
                             <div class="flex items-center justify-between mb-2">
-                                <span class="text-[11px] font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
-                                    <i data-lucide="terminal" class="w-3.5 h-3.5 text-blue-400"></i> LOG EKSEKUSI AGENT (STDOUT)
+                                <span
+                                    class="text-[11px] font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
+                                    <i data-lucide="terminal" class="w-3.5 h-3.5 text-blue-400"></i> LOG EKSEKUSI AGENT
+                                    (STDOUT)
                                 </span>
-                                <button onclick="copyCode('simLogText')" class="text-[10px] text-slate-400 hover:text-white flex items-center gap-1 font-semibold">
+                                <button onclick="copyCode('simLogText')"
+                                    class="text-[10px] text-slate-400 hover:text-white flex items-center gap-1 font-semibold">
                                     <i data-lucide="copy" class="w-3 h-3"></i> Salin Log
                                 </button>
                             </div>
-                            <pre id="simLogText" class="text-[11px] font-mono text-emerald-400 max-h-48 overflow-y-auto whitespace-pre-wrap leading-tight"></pre>
+                            <pre id="simLogText"
+                                class="text-[11px] font-mono text-emerald-400 max-h-48 overflow-y-auto whitespace-pre-wrap leading-tight"></pre>
                         </div>
                     </div>
                 </div>
@@ -471,32 +616,41 @@
 
         <!-- Export All Section -->
         <section class="py-12 max-w-7xl mx-auto px-4 lg:px-8 reveal-on-scroll">
-            <div class="light-card rounded-3xl p-8 text-center relative overflow-hidden border-indigo-200/80 bg-gradient-to-b from-white via-white to-brand-50/20">
+            <div
+                class="light-card rounded-3xl p-8 text-center relative overflow-hidden border-indigo-200/80 bg-gradient-to-b from-white via-white to-brand-50/20">
                 <div class="max-w-2xl mx-auto">
-                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-600 to-indigo-600 flex items-center justify-center mx-auto mb-4 text-white shadow-md shadow-brand-500/20 transform hover:rotate-6 transition">
+                    <div
+                        class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-600 to-indigo-600 flex items-center justify-center mx-auto mb-4 text-white shadow-md shadow-brand-500/20 transform hover:rotate-6 transition">
                         <i data-lucide="package" class="w-6 h-6"></i>
                     </div>
                     <h3 class="text-2xl font-bold text-slate-900 mb-2">Ekspor Semua File Script Workshop</h3>
                     <p class="text-xs sm:text-sm text-slate-600 mb-6 leading-relaxed">
-                        Anda dapat langsung mengunduh masing-masing file Python atau dependensi untuk dijalankan di laptop masing-masing.
+                        Anda dapat langsung mengunduh masing-masing file Python atau dependensi untuk dijalankan di
+                        laptop masing-masing.
                     </p>
                     <div class="flex flex-wrap justify-center gap-3">
-                        <button onclick="downloadSingleFile('requirements.txt', getRequirementsSource())" class="text-xs font-semibold px-4 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 shadow-2xs flex items-center gap-2 transition transform hover:-translate-y-0.5">
+                        <button onclick="downloadSingleFile('requirements.txt', getRequirementsSource())"
+                            class="text-xs font-semibold px-4 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 shadow-2xs flex items-center gap-2 transition transform hover:-translate-y-0.5">
                             <i data-lucide="download" class="w-4 h-4 text-purple-600"></i> requirements.txt
                         </button>
-                        <button onclick="downloadSingleFile('.env', getEnvSource())" class="text-xs font-semibold px-4 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 shadow-2xs flex items-center gap-2 transition transform hover:-translate-y-0.5">
+                        <button onclick="downloadSingleFile('.env', getEnvSource())"
+                            class="text-xs font-semibold px-4 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 shadow-2xs flex items-center gap-2 transition transform hover:-translate-y-0.5">
                             <i data-lucide="download" class="w-4 h-4 text-amber-600"></i> .env
                         </button>
-                        <button onclick="downloadSingleFile('lab1.py', getLab1Source())" class="text-xs font-semibold px-4 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 shadow-2xs flex items-center gap-2 transition transform hover:-translate-y-0.5">
+                        <button onclick="downloadSingleFile('lab1.py', getLab1Source())"
+                            class="text-xs font-semibold px-4 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 shadow-2xs flex items-center gap-2 transition transform hover:-translate-y-0.5">
                             <i data-lucide="download" class="w-4 h-4 text-brand-600"></i> lab1.py
                         </button>
-                        <button onclick="downloadSingleFile('lab2.py', getLab2Source())" class="text-xs font-semibold px-4 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 shadow-2xs flex items-center gap-2 transition transform hover:-translate-y-0.5">
+                        <button onclick="downloadSingleFile('lab2.py', getLab2Source())"
+                            class="text-xs font-semibold px-4 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 shadow-2xs flex items-center gap-2 transition transform hover:-translate-y-0.5">
                             <i data-lucide="download" class="w-4 h-4 text-cyan-600"></i> lab2.py
                         </button>
-                        <button onclick="downloadSingleFile('lab3.py', getLab3Source())" class="text-xs font-semibold px-4 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 shadow-2xs flex items-center gap-2 transition transform hover:-translate-y-0.5">
+                        <button onclick="downloadSingleFile('lab3.py', getLab3Source())"
+                            class="text-xs font-semibold px-4 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 shadow-2xs flex items-center gap-2 transition transform hover:-translate-y-0.5">
                             <i data-lucide="download" class="w-4 h-4 text-emerald-600"></i> lab3.py
                         </button>
-                        <button onclick="downloadSingleFile('lab4.py', getLab4PySource())" class="text-xs font-semibold px-4 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 shadow-2xs flex items-center gap-2 transition transform hover:-translate-y-0.5">
+                        <button onclick="downloadSingleFile('lab4.py', getLab4PySource())"
+                            class="text-xs font-semibold px-4 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 shadow-2xs flex items-center gap-2 transition transform hover:-translate-y-0.5">
                             <i data-lucide="download" class="w-4 h-4 text-indigo-600"></i> lab4.py
                         </button>
                     </div>
@@ -511,24 +665,30 @@
             <div class="flex items-center justify-center gap-2 flex-wrap font-normal text-slate-600">
                 <span>Workshop Building Agentic AI Applications &copy; 2026</span>
                 <span class="text-slate-300">•</span>
-                <span class="inline-flex items-center gap-1.5 bg-slate-50 px-2 py-0.5 rounded-md border border-slate-200/50 text-[10px]">
+                <span
+                    class="inline-flex items-center gap-1.5 bg-slate-50 px-2 py-0.5 rounded-md border border-slate-200/50 text-[10px]">
                     <span class="text-slate-400">In Collaboration with</span>
-                    <img src="IMG_Logo.png" alt="ASTRAtech Logo" class="h-3.5 sm:h-4 w-auto object-contain opacity-90" />
+                    <img src="IMG_Logo.png" alt="ASTRAtech Logo"
+                        class="h-3.5 sm:h-4 w-auto object-contain opacity-90" />
                 </span>
             </div>
-            <p class="text-[10px] text-slate-400">Teknologi: smolagents, Google Gemini 3.6 Flash, Flask, PyAutoGUI, &amp; Tailwind CSS.</p>
+            <p class="text-[10px] text-slate-400">Teknologi: smolagents, Google Gemini 3.6 Flash, Flask, PyAutoGUI,
+                &amp; Tailwind CSS.</p>
         </div>
     </footer>
 
     <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 text-white border border-slate-800 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2.5 text-xs font-semibold">
+    <div id="toast"
+        class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 text-white border border-slate-800 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2.5 text-xs font-semibold">
         <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400" id="toastIcon"></i>
         <span id="toastMsg">Teks berhasil disalin ke clipboard!</span>
     </div>
 
     <!-- Download Modal -->
-    <div id="downloadModal" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm hidden flex items-center justify-center p-4 transition-all">
-        <div class="bg-white w-full max-w-md rounded-2xl p-6 border border-slate-200 shadow-2xl relative animate-scaleUp">
+    <div id="downloadModal"
+        class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm hidden flex items-center justify-center p-4 transition-all">
+        <div
+            class="bg-white w-full max-w-md rounded-2xl p-6 border border-slate-200 shadow-2xl relative animate-scaleUp">
             <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
                 <h4 class="text-base font-bold text-slate-900 flex items-center gap-2">
                     <i data-lucide="download-cloud" class="w-5 h-5 text-brand-600"></i> Export Script Workshop
@@ -541,33 +701,40 @@
                 Pilih file yang ingin langsung Anda unduh ke folder laptop Anda:
             </p>
             <div class="space-y-2 text-xs">
-                <button onclick="downloadSingleFile('requirements.txt', getRequirementsSource())" class="w-full text-left p-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 flex items-center justify-between text-slate-800 font-semibold transition">
+                <button onclick="downloadSingleFile('requirements.txt', getRequirementsSource())"
+                    class="w-full text-left p-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 flex items-center justify-between text-slate-800 font-semibold transition">
                     <span class="font-mono">requirements.txt (Daftar Dependensi)</span>
                     <i data-lucide="download" class="w-4 h-4 text-purple-600"></i>
                 </button>
-                <button onclick="downloadSingleFile('.env', getEnvSource())" class="w-full text-left p-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 flex items-center justify-between text-slate-800 font-semibold transition">
+                <button onclick="downloadSingleFile('.env', getEnvSource())"
+                    class="w-full text-left p-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 flex items-center justify-between text-slate-800 font-semibold transition">
                     <span class="font-mono">.env (Konfigurasi API Key)</span>
                     <i data-lucide="download" class="w-4 h-4 text-amber-600"></i>
                 </button>
-                <button onclick="downloadSingleFile('lab1.py', getLab1Source())" class="w-full text-left p-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 flex items-center justify-between text-slate-800 font-semibold transition">
+                <button onclick="downloadSingleFile('lab1.py', getLab1Source())"
+                    class="w-full text-left p-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 flex items-center justify-between text-slate-800 font-semibold transition">
                     <span class="font-mono">lab1.py (Inisialisasi Model &amp; ReAct)</span>
                     <i data-lucide="download" class="w-4 h-4 text-brand-600"></i>
                 </button>
-                <button onclick="downloadSingleFile('lab2.py', getLab2Source())" class="w-full text-left p-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 flex items-center justify-between text-slate-800 font-semibold transition">
+                <button onclick="downloadSingleFile('lab2.py', getLab2Source())"
+                    class="w-full text-left p-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 flex items-center justify-between text-slate-800 font-semibold transition">
                     <span class="font-mono">lab2.py (Web Search Grounding)</span>
                     <i data-lucide="download" class="w-4 h-4 text-cyan-600"></i>
                 </button>
-                <button onclick="downloadSingleFile('lab3.py', getLab3Source())" class="w-full text-left p-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 flex items-center justify-between text-slate-800 font-semibold transition">
+                <button onclick="downloadSingleFile('lab3.py', getLab3Source())"
+                    class="w-full text-left p-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 flex items-center justify-between text-slate-800 font-semibold transition">
                     <span class="font-mono">lab3.py (Custom Tools @tool)</span>
                     <i data-lucide="download" class="w-4 h-4 text-emerald-600"></i>
                 </button>
-                <button onclick="downloadSingleFile('lab4.py', getLab4PySource())" class="w-full text-left p-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 flex items-center justify-between text-slate-800 font-semibold transition">
+                <button onclick="downloadSingleFile('lab4.py', getLab4PySource())"
+                    class="w-full text-left p-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 flex items-center justify-between text-slate-800 font-semibold transition">
                     <span class="font-mono">lab4.py (Full-Stack &amp; MS Word)</span>
                     <i data-lucide="download" class="w-4 h-4 text-indigo-600"></i>
                 </button>
             </div>
             <div class="mt-5 text-center">
-                <button onclick="closeModal('downloadModal')" class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-700 transition">
+                <button onclick="closeModal('downloadModal')"
+                    class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-700 transition">
                     Tutup
                 </button>
             </div>
