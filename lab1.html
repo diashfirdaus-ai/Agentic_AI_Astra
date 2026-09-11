@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 1: Fondasi Agentic AI &amp; Inisialisasi Model LLM | Workshop</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f5ff',
+                            100: '#e0ebff',
+                            200: '#bae0ff',
+                            400: '#4096ff',
+                            500: '#1677ff',
+                            600: '#0958d9',
+                            700: '#003eb3',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        .glass-header {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .light-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .light-card:hover {
+            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+            border-color: #cbd5e1;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-900 font-sans antialiased min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
+
+    <!-- Scroll Progress -->
+    <div id="scrollProgress" class="fixed top-0 left-0 h-1 bg-gradient-to-r from-brand-600 to-indigo-600 z-50 transition-all duration-150" style="width: 0%;"></div>
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-40 glass-header">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 py-3.5 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3.5 group">
+                <div class="h-10 w-10 rounded-2xl bg-white shadow-sm border border-slate-200/80 p-1 flex items-center justify-center group-hover:scale-105 transition">
+                    <img src="IMG_Logo.png" alt="ASTRAtech Logo" class="h-full w-full object-contain" />
+                </div>
+                <div>
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-brand-600 block leading-none mb-1">Workshop Guide</span>
+                    <h1 class="text-base font-bold text-slate-900 tracking-tight">Agentic AI Applications</h1>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-1 text-xs font-semibold text-slate-600 bg-slate-100/80 p-1.5 rounded-xl border border-slate-200/60">
+                <a href="index.html" class="px-3 py-1.5 rounded-lg hover:text-brand-600 hover:bg-white transition duration-200">Beranda</a>
+                <a href="setup.html" class="px-3 py-1.5 rounded-lg hover:text-brand-600 hover:bg-white transition duration-200">Setup &amp; Instalasi</a>
+                <a href="lab1.html" class="px-3 py-1.5 rounded-lg bg-white text-brand-600 shadow-xs">Lab 1: Model</a>
+                <a href="lab2.html" class="px-3 py-1.5 rounded-lg hover:text-brand-600 hover:bg-white transition duration-200">Lab 2: Search</a>
+                <a href="lab3.html" class="px-3 py-1.5 rounded-lg hover:text-brand-600 hover:bg-white transition duration-200">Lab 3: Custom Tool</a>
+                <a href="lab4.html" class="px-3 py-1.5 rounded-lg hover:text-indigo-600 hover:bg-white transition duration-200 text-indigo-700 font-bold">Lab 4: Full-Stack</a>
+                <a href="troubleshooting.html" class="px-3 py-1.5 rounded-lg hover:text-amber-700 hover:bg-white transition duration-200 text-amber-700">Solusi Error</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="flex items-center gap-2">
+                <button onclick="downloadSingleFile('lab1.py', getLab1Source())" class="flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 shadow-sm transition transform hover:-translate-y-0.5">
+                    <i data-lucide="download" class="w-3.5 h-3.5 text-brand-600"></i>
+                    <span class="hidden sm:inline">Download lab1.py</span>
+                </button>
+                <a href="lab2.html" class="flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white shadow-md shadow-brand-500/20 transition transform hover:-translate-y-0.5">
+                    <span>Ke Lab 2</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+                <button id="mobileMenuBtn" class="md:hidden p-2 rounded-xl bg-slate-100 text-slate-600 hover:text-slate-900 border border-slate-200">
+                    <i data-lucide="menu" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobileDrawer" class="hidden md:hidden pt-4 pb-2 border-t border-slate-200 mt-2 space-y-1 bg-white rounded-2xl p-3 shadow-lg mx-4">
+            <a href="index.html" class="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50">Beranda Portal</a>
+            <a href="setup.html" class="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50">1. Setup &amp; Instalasi Python</a>
+            <a href="lab1.html" class="block px-3 py-2 rounded-lg text-sm bg-brand-50 text-brand-600 font-bold">2. Lab 1: Fondasi Agentic AI</a>
+            <a href="lab2.html" class="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50">3. Lab 2: Web Browsing Agent</a>
+            <a href="lab3.html" class="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50">4. Lab 3: Custom Tools @tool</a>
+            <a href="lab4.html" class="block px-3 py-2 rounded-lg text-sm text-indigo-700 font-bold hover:bg-indigo-50">5. Lab 4: Full-Stack &amp; MS Word</a>
+            <a href="troubleshooting.html" class="block px-3 py-2 rounded-lg text-sm text-amber-700 hover:bg-amber-50">6. Solusi &amp; Troubleshooting</a>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- Breadcrumb & Hero -->
+        <div class="border-b border-slate-200 bg-white">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8 py-8 lg:py-12">
+                <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-3">
+                    <a href="index.html" class="hover:text-brand-600 flex items-center gap-1">
+                        <i data-lucide="home" class="w-3.5 h-3.5"></i> Beranda
+                    </a>
+                    <span>/</span>
+                    <a href="setup.html" class="hover:text-brand-600">Setup</a>
+                    <span>/</span>
+                    <span class="text-brand-600 font-bold">Lab 1</span>
+                </div>
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 border border-brand-200 text-brand-700 text-xs font-bold mb-3">
+                            <i data-lucide="cpu" class="w-3.5 h-3.5"></i> Modul 1: Tingkat Pemula
+                        </div>
+                        <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-2">
+                            Lab 1: Fondasi Agentic AI &amp; Inisialisasi Model LLM
+                        </h2>
+                        <p class="text-sm sm:text-base text-slate-600 max-w-3xl leading-relaxed">
+                            Pahami perbedaan mendasar antara model prompt tunggal (Single-Shot) dan siklus kerja otonom ReAct (Reason + Act). Menghubungkan library <code>smolagents</code> ke endpoint Google Gemini 3.6 Flash via adapter OpenAI Server.
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-semibold flex items-center gap-1">
+                            <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> Pemula
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 py-10 space-y-10">
+
+            <!-- CONCEPT CARDS -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="light-card p-6 rounded-3xl border-rose-200/80 bg-gradient-to-b from-white to-rose-50/20">
+                    <div class="text-xs font-bold text-rose-700 uppercase tracking-wider mb-2 flex items-center gap-2">
+                        <i data-lucide="message-square-off" class="w-4 h-4"></i> LLM Tradisional (Single-Shot Prompting)
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        Pengguna memberikan instruksi, lalu model LLM langsung menggenerasi jawaban secara pasif hanya berdasarkan bobot parameter memorinya (cut-off data). Model tidak dapat memeriksa fakta internet terbaru, tidak dapat menghitung angka kompleks dengan presisi, dan tidak dapat memanggil fungsi di sistem komputer.
+                    </p>
+                </div>
+
+                <div class="light-card p-6 rounded-3xl border-indigo-200/80 bg-gradient-to-b from-white to-indigo-50/30">
+                    <div class="text-xs font-bold text-indigo-700 uppercase tracking-wider mb-2 flex items-center gap-2">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i> Agentic AI (Siklus ReAct)
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        Agent memiliki loop eksekusi otonom: <strong>Thought (Penalaran)</strong> &rarr; <strong>Action (Memilih &amp; Menjalankan Alat)</strong> &rarr; <strong>Observation (Membaca Hasil Alat)</strong> &rarr; <strong>Final Answer</strong>. Agent dapat memecah masalah rumit menjadi langkah-langkah sistematis hingga tujuan tercapai.
+                    </p>
+                </div>
+            </div>
+
+            <!-- CODE VIEWER -->
+            <section class="light-card rounded-3xl overflow-hidden shadow-sm">
+                <div class="bg-slate-900 px-5 py-3.5 flex flex-wrap items-center justify-between gap-3 border-b border-slate-800">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-rose-500 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
+                        <span class="ml-2 text-xs font-mono text-slate-300 font-bold">lab1.py</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="downloadSingleFile('lab1.py', getLab1Source())" class="text-xs text-slate-300 hover:text-white px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 flex items-center gap-1.5 transition">
+                            <i data-lucide="download" class="w-3.5 h-3.5"></i> Download File
+                        </button>
+                        <button onclick="copyCode('lab1-code')" class="text-xs text-brand-300 hover:text-white px-3.5 py-1.5 rounded-lg bg-brand-600 hover:bg-brand-700 flex items-center gap-1.5 transition font-semibold">
+                            <i data-lucide="copy" class="w-3.5 h-3.5"></i> Salin Kode
+                        </button>
+                    </div>
+                </div>
+                <div class="p-5 bg-slate-950 overflow-x-auto max-h-[600px]">
+                    <pre id="lab1-code" class="font-mono text-xs text-slate-200 leading-relaxed"><code>import os
+import sys
+import requests
+import logging
+
+# Fix encoding untuk terminal Windows
+sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+
+from dotenv import load_dotenv
+from smolagents import ToolCallingAgent, OpenAIServerModel
+
+load_dotenv()
+
+# Aktifkan logging agar proses agent terlihat di terminal
+logging.basicConfig(level=logging.INFO)
+
+# ============================================
+# 1. INISIALISASI MODEL VIA GOOGLE AI STUDIO (GEMINI)
+# ============================================
+# Dapatkan API Key di: https://aistudio.google.com/apikey
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+if not GOOGLE_API_KEY:
+    raise ValueError("Set GOOGLE_API_KEY di file .env sebelum menjalankan script ini.")
+
+# --- Pre-flight check: Tes koneksi ke Google AI Studio API ---
+print("🔍 Mengecek koneksi ke Google AI Studio (Gemini)...")
+try:
+    test_res = requests.post(
+        "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
+        headers={"Authorization": f"Bearer {GOOGLE_API_KEY}", "Content-Type": "application/json"},
+        json={"model": "gemini-3.6-flash", "messages": [{"role": "user", "content": "Hi"}], "max_tokens": 10},
+        timeout=15
+    )
+    if test_res.status_code == 200:
+        print("✅ Koneksi Google AI Studio berhasil!")
+    elif test_res.status_code == 400:
+        body = test_res.json()
+        print(f"❌ Bad Request: {body.get('error', {}).get('message', test_res.text)}")
+        exit(1)
+    elif test_res.status_code == 403:
+        print("❌ API Key TIDAK VALID atau belum diaktifkan!")
+        print("   Dapatkan key baru di https://aistudio.google.com/apikey")
+        print(f"   Response: {test_res.text}")
+        exit(1)
+    elif test_res.status_code == 429:
+        print("⚠️ Rate limit! Terlalu banyak request. Tunggu 1-2 menit lalu coba lagi.")
+        print(f"   Response: {test_res.text}")
+        exit(1)
+    else:
+        print(f"⚠️ Status tidak terduga: {test_res.status_code}")
+        print(f"   Response: {test_res.text}")
+        exit(1)
+except requests.exceptions.Timeout:
+    print("❌ Koneksi timeout! Periksa koneksi internet Anda.")
+    exit(1)
+except Exception as e:
+    print(f"❌ Error koneksi: {e}")
+    exit(1)
+
+# --- Inisialisasi model ---
+model = OpenAIServerModel(
+    model_id="gemini-3.6-flash",  # Gemini 3.6 Flash (gratis, cepat)
+    api_base="https://generativelanguage.googleapis.com/v1beta/openai/",
+    api_key=GOOGLE_API_KEY
+)
+
+# ============================================
+# 2. INISIALISASI AGENT
+# ============================================
+agent = ToolCallingAgent(
+    tools=[],
+    model=model,
+    max_steps=4
+)
+
+# ============================================
+# 3. JALANKAN PROMPT MATEMATIKA SEDERHANA
+# ============================================
+print("\n🚀 Menjalankan agent...")
+try:
+    result = agent.run("Jika saya punya 25 apel, membeli 30 lagi, lalu memberikan 12 ke teman, berapa sisa apel saya?")
+    print("\n=== HASIL AKHIR ===")
+    print(result)
+except Exception as e:
+    print(f"\n❌ Agent error: {e}")</code></pre>
+                </div>
+            </section>
+
+            <!-- HOW TO RUN & EXPECTED OUTPUT -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- How to Run -->
+                <div class="light-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between">
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-900 mb-3 flex items-center gap-2">
+                            <i data-lucide="play-circle" class="w-4 h-4 text-brand-600"></i> Cara Menjalankan Lab 1
+                        </h4>
+                        <ol class="list-decimal list-inside space-y-2 text-xs text-slate-600 mb-4 leading-relaxed">
+                            <li>Pastikan file <code>.env</code> sudah ada di folder dan berisi <code>GOOGLE_API_KEY</code>.</li>
+                            <li>Pastikan virtual environment telah aktif (terdapat tanda <code>(agentai_venv)</code>).</li>
+                            <li>Simpan script di atas dengan nama <code class="font-mono bg-slate-100 px-1 py-0.5 rounded text-slate-800">lab1.py</code>.</li>
+                            <li>Jalankan perintah berikut di terminal:</li>
+                        </ol>
+                        <div class="bg-slate-900 rounded-xl p-3.5 font-mono text-xs text-slate-200 border border-slate-800 flex items-center justify-between">
+                            <code>python lab1.py</code>
+                            <button onclick="copyRawText('python lab1.py')" class="text-slate-400 hover:text-white"><i data-lucide="copy" class="w-3.5 h-3.5"></i></button>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] text-slate-500 flex items-center gap-1.5">
+                        <i data-lucide="info" class="w-3.5 h-3.5 text-blue-600"></i>
+                        Parameter <code>max_steps=4</code> mencegah agent looping tanpa batas jika terjadi kendala.
+                    </div>
+                </div>
+
+                <!-- Expected Output -->
+                <div class="light-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between">
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-900 mb-3 flex items-center gap-2">
+                            <i data-lucide="terminal" class="w-4 h-4 text-emerald-600"></i> Ekspektasi Output Terminal
+                        </h4>
+                        <div class="bg-slate-950 rounded-xl p-4 font-mono text-xs text-emerald-400 border border-slate-800 leading-relaxed shadow-inner">
+                            <div>🔍 Mengecek koneksi ke Google AI Studio (Gemini)...</div>
+                            <div>✅ Koneksi Google AI Studio berhasil!</div>
+                            <div class="text-slate-500 mt-1"># [Siklus ReAct smolagents dimulai]</div>
+                            <div>🚀 Menjalankan agent...</div>
+                            <div class="text-slate-400 mt-1">[Step 1] Thought: 25 + 30 = 55, 55 - 12 = 43.</div>
+                            <div class="text-white font-bold mt-2">=== HASIL AKHIR ===</div>
+                            <div class="text-emerald-300">Sisa apel Anda sekarang adalah 43 buah.</div>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] text-emerald-700 flex items-center gap-1.5 font-medium">
+                        <i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-600"></i>
+                        Jika output di atas muncul, model Gemini 3.6 Flash berhasil diajak bernalar via smolagents!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-slate-200">
+                <a href="setup.html" class="flex items-center gap-2 text-xs font-semibold px-4 py-2.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 shadow-xs transition">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                    <span>Kembali ke Setup</span>
+                </a>
+                <a href="lab2.html" class="flex items-center gap-2 text-xs font-bold px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white shadow-md shadow-brand-500/25 transition transform hover:-translate-y-0.5">
+                    <span>Lanjut ke Lab 2: Web Search Grounding</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200/80 py-6 bg-white text-[11px] text-slate-500 text-center mt-12">
+        <div class="max-w-7xl mx-auto px-4 space-y-1.5">
+            <div class="flex items-center justify-center gap-2 flex-wrap font-normal text-slate-600">
+                <span>Workshop Building Agentic AI Applications &copy; 2026</span>
+                <span class="text-slate-300">•</span>
+                <span class="inline-flex items-center gap-1.5 bg-slate-50 px-2 py-0.5 rounded-md border border-slate-200/50 text-[10px]">
+                    <span class="text-slate-400">In Collaboration with</span>
+                    <img src="IMG_Logo.png" alt="ASTRAtech Logo" class="h-3.5 sm:h-4 w-auto object-contain opacity-90" />
+                </span>
+            </div>
+            <p class="text-[10px] text-slate-400">Teknologi: smolagents, Google Gemini 3.6 Flash, Flask, PyAutoGUI, &amp; Tailwind CSS.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 text-white border border-slate-800 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2.5 text-xs font-semibold">
+        <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400" id="toastIcon"></i>
+        <span id="toastMsg">Teks berhasil disalin ke clipboard!</span>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            initScrollProgress();
+            initMobileMenu();
+        });
+
+        function initScrollProgress() {
+            window.addEventListener('scroll', () => {
+                const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = (window.pageYOffset / totalHeight) * 100;
+                document.getElementById('scrollProgress').style.width = progress + '%';
+            });
+        }
+
+        function initMobileMenu() {
+            const btn = document.getElementById('mobileMenuBtn');
+            const drawer = document.getElementById('mobileDrawer');
+            if (btn && drawer) {
+                btn.addEventListener('click', () => drawer.classList.toggle('hidden'));
+            }
+        }
+
+        function showToast(message, isSuccess = true) {
+            const toast = document.getElementById('toast');
+            const msgEl = document.getElementById('toastMsg');
+            const iconEl = document.getElementById('toastIcon');
+
+            msgEl.innerText = message;
+            if (isSuccess) {
+                iconEl.setAttribute('data-lucide', 'check-circle');
+                iconEl.className = 'w-4 h-4 text-emerald-400';
+            } else {
+                iconEl.setAttribute('data-lucide', 'alert-circle');
+                iconEl.className = 'w-4 h-4 text-amber-400';
+            }
+            lucide.createIcons();
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2500);
+        }
+
+        function copyCode(elementId) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+            copyRawText(el.innerText);
+        }
+
+        function copyRawText(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showToast('Kode berhasil disalin ke clipboard!');
+                } else {
+                    showToast('Silakan seleksi dan salin manual', false);
+                }
+            } catch (err) {
+                showToast('Gagal menyalin: ' + err.message, false);
+            } finally {
+                document.body.removeChild(textarea);
+            }
+        }
+
+        function getLab1Source() {
+            return document.getElementById('lab1-code').innerText;
+        }
+
+        function downloadSingleFile(filename, content) {
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast(`File "${filename}" berhasil diunduh!`);
+        }
+    </script>
+</body>
+
+</html>

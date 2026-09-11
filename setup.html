@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan Lengkap Setup & Instalasi Python | Workshop Agentic AI</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f5ff',
+                            100: '#e0ebff',
+                            200: '#bae0ff',
+                            400: '#4096ff',
+                            500: '#1677ff',
+                            600: '#0958d9',
+                            700: '#003eb3',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Modern Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        .glass-header {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .light-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .light-card:hover {
+            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+            border-color: #cbd5e1;
+        }
+
+        .gradient-text-hero {
+            background: linear-gradient(135deg, #0958d9 0%, #7c3aed 50%, #0d9488 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-900 font-sans antialiased min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
+
+    <!-- Top Reading Progress Indicator -->
+    <div id="scrollProgress" class="fixed top-0 left-0 h-1 bg-gradient-to-r from-brand-600 via-indigo-600 to-emerald-500 z-50 transition-all duration-150" style="width: 0%;"></div>
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-40 glass-header">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 py-3.5 flex items-center justify-between">
+            <!-- Brand Info -->
+            <a href="index.html" class="flex items-center gap-3.5 group">
+                <div class="h-10 w-10 rounded-2xl bg-white shadow-sm border border-slate-200/80 p-1 flex items-center justify-center group-hover:scale-105 transition">
+                    <img src="IMG_Logo.png" alt="ASTRAtech Logo" class="h-full w-full object-contain" />
+                </div>
+                <div>
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-brand-600 block leading-none mb-1">Workshop Guide</span>
+                    <h1 class="text-base font-bold text-slate-900 tracking-tight">Agentic AI Applications</h1>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-1 text-xs font-semibold text-slate-600 bg-slate-100/80 p-1.5 rounded-xl border border-slate-200/60">
+                <a href="index.html" class="px-3 py-1.5 rounded-lg hover:text-brand-600 hover:bg-white transition duration-200">Beranda</a>
+                <a href="setup.html" class="px-3 py-1.5 rounded-lg bg-white text-brand-600 shadow-xs">Setup &amp; Instalasi</a>
+                <a href="lab1.html" class="px-3 py-1.5 rounded-lg hover:text-brand-600 hover:bg-white transition duration-200">Lab 1: Model</a>
+                <a href="lab2.html" class="px-3 py-1.5 rounded-lg hover:text-brand-600 hover:bg-white transition duration-200">Lab 2: Search</a>
+                <a href="lab3.html" class="px-3 py-1.5 rounded-lg hover:text-brand-600 hover:bg-white transition duration-200">Lab 3: Custom Tool</a>
+                <a href="lab4.html" class="px-3 py-1.5 rounded-lg hover:text-indigo-600 hover:bg-white transition duration-200 text-indigo-700 font-bold">Lab 4: Full-Stack</a>
+                <a href="troubleshooting.html" class="px-3 py-1.5 rounded-lg hover:text-amber-700 hover:bg-white transition duration-200 text-amber-700">Solusi Error</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="flex items-center gap-2">
+                <button onclick="openModal('downloadModal')" class="flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 shadow-sm transition transform hover:-translate-y-0.5">
+                    <i data-lucide="download" class="w-3.5 h-3.5 text-slate-500"></i>
+                    <span class="hidden sm:inline">Export Script</span>
+                </button>
+                <a href="lab1.html" class="flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white shadow-md shadow-brand-500/20 transition transform hover:-translate-y-0.5">
+                    <span>Mulai Lab 1</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+                <button id="mobileMenuBtn" class="md:hidden p-2 rounded-xl bg-slate-100 text-slate-600 hover:text-slate-900 border border-slate-200">
+                    <i data-lucide="menu" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobileDrawer" class="hidden md:hidden pt-4 pb-2 border-t border-slate-200 mt-2 space-y-1 bg-white rounded-2xl p-3 shadow-lg mx-4">
+            <a href="index.html" class="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50">Beranda Portal</a>
+            <a href="setup.html" class="block px-3 py-2 rounded-lg text-sm bg-brand-50 text-brand-600 font-bold">1. Setup &amp; Instalasi Python</a>
+            <a href="lab1.html" class="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50">2. Lab 1: Fondasi Agentic AI</a>
+            <a href="lab2.html" class="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50">3. Lab 2: Web Browsing Agent</a>
+            <a href="lab3.html" class="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50">4. Lab 3: Custom Tools @tool</a>
+            <a href="lab4.html" class="block px-3 py-2 rounded-lg text-sm text-indigo-700 font-bold hover:bg-indigo-50">5. Lab 4: Full-Stack &amp; MS Word</a>
+            <a href="troubleshooting.html" class="block px-3 py-2 rounded-lg text-sm text-amber-700 hover:bg-amber-50">6. Solusi &amp; Troubleshooting</a>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- Breadcrumb & Header Hero -->
+        <div class="border-b border-slate-200 bg-white">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8 py-8 lg:py-12">
+                <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-3">
+                    <a href="index.html" class="hover:text-brand-600 flex items-center gap-1">
+                        <i data-lucide="home" class="w-3.5 h-3.5"></i> Beranda
+                    </a>
+                    <span>/</span>
+                    <span class="text-brand-600 font-bold">Panduan Setup &amp; Instalasi</span>
+                </div>
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200/80 text-blue-700 text-xs font-bold mb-3">
+                            <i data-lucide="wrench" class="w-3.5 h-3.5"></i> Tahap 0: Persiapan Sistem
+                        </div>
+                        <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-2">
+                            Panduan Instalasi Python, Virtual Environment &amp; Library
+                        </h2>
+                        <p class="text-sm sm:text-base text-slate-600 max-w-3xl leading-relaxed">
+                            Panduan komprehensif langkah-demi-langkah untuk menyiapkan mesin lokal Anda sebelum menjalankan rangkaian hands-on Agentic AI (Windows, macOS, dan Linux).
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <a href="lab1.html" class="px-5 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold shadow-md shadow-brand-500/20 flex items-center gap-2 transition transform hover:-translate-y-0.5">
+                            <span>Lanjut ke Lab 1</span>
+                            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 py-10 space-y-12">
+
+            <!-- STEP 1: INSTALL PYTHON -->
+            <section class="light-card rounded-3xl p-6 sm:p-8">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-700 font-extrabold flex items-center justify-center text-sm">1</div>
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900">Instalasi Python 3.10+ (Multi-OS)</h3>
+                        <p class="text-xs text-slate-500">Pilih sistem operasi laptop yang Anda gunakan</p>
+                    </div>
+                </div>
+
+                <!-- OS Tabs -->
+                <div class="flex flex-wrap gap-2 mb-6 border-b border-slate-200 pb-3">
+                    <button id="tabBtnWin" onclick="switchOsTab('win')" class="px-4 py-2 rounded-xl text-xs font-bold bg-brand-600 text-white flex items-center gap-2 transition shadow-xs">
+                        <i data-lucide="monitor" class="w-4 h-4"></i> Windows (10/11)
+                    </button>
+                    <button id="tabBtnMac" onclick="switchOsTab('mac')" class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center gap-2 transition">
+                        <i data-lucide="apple" class="w-4 h-4"></i> macOS (Intel &amp; Apple Silicon)
+                    </button>
+                    <button id="tabBtnLinux" onclick="switchOsTab('linux')" class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center gap-2 transition">
+                        <i data-lucide="terminal" class="w-4 h-4"></i> Linux (Ubuntu/Debian)
+                    </button>
+                </div>
+
+                <!-- OS Content: Windows -->
+                <div id="osContentWin" class="space-y-4">
+                    <div class="bg-amber-50 border border-amber-300/80 rounded-2xl p-4 sm:p-5 flex items-start gap-3.5 text-xs text-amber-900">
+                        <i data-lucide="alert-triangle" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                        <div>
+                            <span class="font-extrabold text-amber-950 block text-sm mb-1">KRUSIAL UNTUK PENGGUNA WINDOWS!</span>
+                            Saat jendela installer Python terbuka, Anda <strong>WAJIB mencentang kotak</strong>:
+                            <div class="mt-2 font-mono bg-white/90 border border-amber-300 px-3 py-1.5 rounded-lg text-amber-950 font-bold inline-block">
+                                ☑ Add python.exe to PATH (atau "Add Python to PATH")
+                            </div>
+                            <p class="mt-1 text-slate-600">Jika terlewat, perintah <code>python</code> dan <code>pip</code> tidak akan dikenali di Command Prompt atau PowerShell.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+                        <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50">
+                            <span class="text-xs font-bold text-brand-600 mb-1 block">Langkah 1.1</span>
+                            <h4 class="text-sm font-bold text-slate-900 mb-2">Unduh Installer Resmi</h4>
+                            <p class="text-xs text-slate-600 mb-3">Kunjungi situs resmi Python dan unduh versi terbaru (3.10, 3.11, atau 3.12):</p>
+                            <a href="https://www.python.org/downloads/windows/" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 hover:text-brand-700 bg-white border border-brand-200 px-3 py-1.5 rounded-lg hover:shadow-xs transition">
+                                <span>python.org/downloads</span>
+                                <i data-lucide="external-link" class="w-3 h-3"></i>
+                            </a>
+                        </div>
+
+                        <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50">
+                            <span class="text-xs font-bold text-brand-600 mb-1 block">Langkah 1.2</span>
+                            <h4 class="text-sm font-bold text-slate-900 mb-2">Jalankan File .exe</h4>
+                            <p class="text-xs text-slate-600">
+                                Buka file installer yang diunduh. Centang <strong class="text-brand-700">Add python.exe to PATH</strong> di pojok bawah, lalu klik <strong>Install Now</strong>.
+                            </p>
+                        </div>
+
+                        <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50">
+                            <span class="text-xs font-bold text-brand-600 mb-1 block">Langkah 1.3</span>
+                            <h4 class="text-sm font-bold text-slate-900 mb-2">Disable Path Limit (Opsional)</h4>
+                            <p class="text-xs text-slate-600">
+                                Di akhir instalasi, jika muncul opsi <em>"Disable path length limit"</em>, klik opsi tersebut agar path panjang tidak menimbulkan error.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OS Content: macOS -->
+                <div id="osContentMac" class="hidden space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="border border-slate-200 rounded-2xl p-5 bg-slate-50">
+                            <div class="flex items-center gap-2 mb-2 text-brand-600 font-bold text-xs">
+                                <i data-lucide="terminal" class="w-4 h-4"></i> Opsi Rekomendasi: Homebrew
+                            </div>
+                            <h4 class="text-sm font-bold text-slate-900 mb-2">Via Terminal Homebrew</h4>
+                            <p class="text-xs text-slate-600 mb-3">Jika Anda menggunakan Homebrew di macOS, jalankan:</p>
+                            <div class="bg-slate-900 rounded-xl p-3 text-emerald-400 font-mono text-xs flex items-center justify-between">
+                                <code>brew install python@3.11</code>
+                                <button onclick="copyRawText('brew install python@3.11')" class="text-slate-400 hover:text-white"><i data-lucide="copy" class="w-3.5 h-3.5"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="border border-slate-200 rounded-2xl p-5 bg-slate-50">
+                            <div class="flex items-center gap-2 mb-2 text-indigo-600 font-bold text-xs">
+                                <i data-lucide="download" class="w-4 h-4"></i> Opsi Installer .pkg
+                            </div>
+                            <h4 class="text-sm font-bold text-slate-900 mb-2">Via Installer Resmi Python.org</h4>
+                            <p class="text-xs text-slate-600 mb-3">Unduh installer universal package macOS:</p>
+                            <a href="https://www.python.org/downloads/macos/" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600 bg-white border border-indigo-200 px-3 py-2 rounded-lg hover:shadow-xs transition">
+                                <span>Unduh macOS 64-bit universal installer</span>
+                                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OS Content: Linux -->
+                <div id="osContentLinux" class="hidden space-y-4">
+                    <div class="border border-slate-200 rounded-2xl p-5 bg-slate-50">
+                        <h4 class="text-sm font-bold text-slate-900 mb-2 flex items-center gap-2">
+                            <i data-lucide="terminal" class="w-4 h-4 text-emerald-600"></i> Instalasi di Ubuntu / Debian
+                        </h4>
+                        <p class="text-xs text-slate-600 mb-3">Jalankan perintah apt berikut (termasuk modul venv dan dependensi grafis PyAutoGUI):</p>
+                        <div class="bg-slate-900 rounded-xl p-3 text-emerald-400 font-mono text-xs flex items-center justify-between">
+                            <code>sudo apt update && sudo apt install -y python3 python3-pip python3-venv python3-tk scrot</code>
+                            <button onclick="copyRawText('sudo apt update && sudo apt install -y python3 python3-pip python3-venv python3-tk scrot')" class="text-slate-400 hover:text-white"><i data-lucide="copy" class="w-3.5 h-3.5"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STEP 2: VERIFIKASI INSTALASI -->
+            <section class="light-card rounded-3xl p-6 sm:p-8">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-9 h-9 rounded-xl bg-indigo-100 text-indigo-700 font-extrabold flex items-center justify-center text-sm">2</div>
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900">Verifikasi Instalasi di Terminal</h3>
+                        <p class="text-xs text-slate-500">Buka Command Prompt, PowerShell, atau Terminal macOS/Linux</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold text-slate-700 flex items-center justify-between">
+                            <span>1. Cek Versi Python:</span>
+                            <button onclick="copyRawText('python --version')" class="text-brand-600 hover:underline flex items-center gap-1"><i data-lucide="copy" class="w-3 h-3"></i> Salin</button>
+                        </label>
+                        <div class="bg-slate-900 rounded-xl p-3.5 font-mono text-xs text-slate-200 border border-slate-800">
+                            <div class="text-slate-400 mb-1"># Jalankan perintah:</div>
+                            <div class="text-emerald-400 font-bold">python --version</div>
+                            <div class="text-slate-500 text-[11px] mt-2"># Atau jika di macOS/Linux:</div>
+                            <div class="text-slate-300">python3 --version</div>
+                        </div>
+                        <div class="text-xs text-slate-500 flex items-center gap-1.5">
+                            <i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-600"></i>
+                            Output diharapkan: <code>Python 3.10.x</code> atau lebih baru (3.11 / 3.12).
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold text-slate-700 flex items-center justify-between">
+                            <span>2. Cek Package Manager (pip):</span>
+                            <button onclick="copyRawText('pip --version')" class="text-brand-600 hover:underline flex items-center gap-1"><i data-lucide="copy" class="w-3 h-3"></i> Salin</button>
+                        </label>
+                        <div class="bg-slate-900 rounded-xl p-3.5 font-mono text-xs text-slate-200 border border-slate-800">
+                            <div class="text-slate-400 mb-1"># Jalankan perintah:</div>
+                            <div class="text-emerald-400 font-bold">pip --version</div>
+                            <div class="text-slate-500 text-[11px] mt-2"># Atau jika di macOS/Linux:</div>
+                            <div class="text-slate-300">pip3 --version</div>
+                        </div>
+                        <div class="text-xs text-slate-500 flex items-center gap-1.5">
+                            <i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-600"></i>
+                            Output diharapkan: <code>pip 24.x.x from ... (python 3.x)</code>.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STEP 3: VIRTUAL ENVIRONMENT -->
+            <section class="light-card rounded-3xl p-6 sm:p-8">
+                <div class="flex items-center justify-between flex-wrap gap-3 mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 font-extrabold flex items-center justify-center text-sm">3</div>
+                        <div>
+                            <h3 class="text-lg sm:text-xl font-bold text-slate-900">Membuat &amp; Mengaktifkan Virtual Environment (venv)</h3>
+                            <p class="text-xs text-slate-500">Mengisolasi package library agar tidak bentrok dengan sistem OS</p>
+                        </div>
+                    </div>
+                    <span class="text-xs font-bold px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                        Best Practice
+                    </span>
+                </div>
+
+                <p class="text-xs sm:text-sm text-slate-600 mb-6 leading-relaxed">
+                    <strong>Virtual Environment (venv)</strong> adalah ruang kerja terisolasi untuk proyek Python Anda. Setiap library yang Anda instal hanya berada di dalam folder proyek ini, menjaga kestabilan sistem komputer Anda.
+                </p>
+
+                <!-- Step 3.1 & 3.2 Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                    <!-- Create Venv -->
+                    <div class="border border-slate-200 rounded-2xl p-5 bg-slate-50/80 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                                    <i data-lucide="folder-plus" class="w-4 h-4 text-emerald-600"></i> 1. Buat Folder &amp; Venv
+                                </h4>
+                                <button onclick="copyCode('codeCreateVenv')" class="text-xs text-slate-600 hover:text-slate-900 bg-white px-2.5 py-1 rounded-lg border border-slate-200 flex items-center gap-1 shadow-2xs">
+                                    <i data-lucide="copy" class="w-3 h-3"></i> Salin
+                                </button>
+                            </div>
+                            <p class="text-xs text-slate-600 mb-3">Ketikkan di terminal secara berurutan:</p>
+                            <div class="bg-slate-900 rounded-xl p-4 font-mono text-xs text-slate-200 border border-slate-800">
+                                <pre id="codeCreateVenv"><code># Buat direktori proyek & masuk
+mkdir agentai_workshop
+cd agentai_workshop
+
+# Buat virtual environment bernama 'agentai_venv'
+python -m venv agentai_venv</code></pre>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-[11px] text-slate-500 flex items-center gap-1.5">
+                            <i data-lucide="info" class="w-3.5 h-3.5 text-blue-600"></i>
+                            Sebuah folder <code>agentai_venv/</code> akan otomatis terbentuk.
+                        </div>
+                    </div>
+
+                    <!-- Activate Venv -->
+                    <div class="border border-slate-200 rounded-2xl p-5 bg-slate-50/80 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                                    <i data-lucide="play" class="w-4 h-4 text-brand-600"></i> 2. Aktifkan Venv
+                                </h4>
+                                <button onclick="copyCode('codeActivateVenv')" class="text-xs text-slate-600 hover:text-slate-900 bg-white px-2.5 py-1 rounded-lg border border-slate-200 flex items-center gap-1 shadow-2xs">
+                                    <i data-lucide="copy" class="w-3 h-3"></i> Salin
+                                </button>
+                            </div>
+                            <p class="text-xs text-slate-600 mb-3">Pilih perintah sesuai shell terminal Anda:</p>
+                            <div class="bg-slate-900 rounded-xl p-4 font-mono text-xs text-slate-200 border border-slate-800">
+                                <pre id="codeActivateVenv"><code># OPSI 1: Windows PowerShell
+.\agentai_venv\Scripts\Activate.ps1
+
+# OPSI 2: Windows Command Prompt (CMD)
+.\agentai_venv\Scripts\activate.bat
+
+# OPSI 3: macOS / Linux (bash/zsh)
+source agentai_venv/bin/activate</code></pre>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-[11px] text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-xl p-2.5 flex items-center gap-2 font-medium">
+                            <i data-lucide="check-circle" class="w-4 h-4 flex-shrink-0"></i>
+                            Tanda venv berhasil aktif: Muncul teks <code>(agentai_venv)</code> di depan baris prompt terminal!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PowerShell ExecutionPolicy Bypass Warning -->
+                <div class="bg-amber-50 border border-amber-300 rounded-2xl p-5 flex items-start gap-3.5 text-xs text-amber-950">
+                    <i data-lucide="shield-alert" class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                    <div class="space-y-1.5 flex-grow">
+                        <span class="font-bold text-sm block text-amber-900">Mengatasi Error PowerShell: "cannot be loaded because running scripts is disabled"</span>
+                        <p class="leading-relaxed">
+                            Secara default, Windows PowerShell membatasi eksekusi file script (<code>.ps1</code>). Jika saat aktivasi muncul pesan merah ExecutionPolicy, jalankan perintah berikut di PowerShell Anda:
+                        </p>
+                        <div class="bg-slate-900 text-emerald-400 font-mono p-3 rounded-xl flex items-center justify-between border border-slate-800">
+                            <code id="codeBypass">Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass</code>
+                            <button onclick="copyCode('codeBypass')" class="text-slate-400 hover:text-white px-2 py-1 bg-slate-800 rounded-lg text-[11px] flex items-center gap-1">
+                                <i data-lucide="copy" class="w-3 h-3"></i> Salin Perintah
+                            </button>
+                        </div>
+                        <p class="text-[11px] text-amber-800">
+                            Perintah di atas hanya berlaku aman untuk sesi terminal yang sedang terbuka dan tidak mengubah konfigurasi keamanan global sistem Anda.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STEP 4: INSTALL LIBRARIES -->
+            <section class="light-card rounded-3xl p-6 sm:p-8">
+                <div class="flex items-center justify-between flex-wrap gap-3 mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-purple-100 text-purple-700 font-extrabold flex items-center justify-center text-sm">4</div>
+                        <div>
+                            <h3 class="text-lg sm:text-xl font-bold text-slate-900">Instalasi Pustaka &amp; Dependensi AI</h3>
+                            <p class="text-xs text-slate-500">Menginstal Smolagents, Flask, PyAutoGUI, dan utility penunjang</p>
+                        </div>
+                    </div>
+                    <button onclick="downloadSingleFile('requirements.txt', getRequirementsSource())" class="text-xs font-semibold px-3.5 py-2 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 shadow-2xs flex items-center gap-1.5 transition">
+                        <i data-lucide="download" class="w-3.5 h-3.5 text-purple-600"></i>
+                        <span>Unduh requirements.txt</span>
+                    </button>
+                </div>
+
+                <!-- Install Commands -->
+                <div class="space-y-4 mb-8">
+                    <p class="text-xs sm:text-sm text-slate-600">
+                        Pastikan virtual environment telah aktif (<code>(agentai_venv)</code>), kemudian jalankan:
+                    </p>
+
+                    <div class="bg-slate-900 rounded-2xl p-4 sm:p-5 font-mono text-xs text-slate-200 border border-slate-800 shadow-inner">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-3">
+                            <span class="text-slate-400 text-[11px]"># Perintah Instalasi Satu Baris (Terminal)</span>
+                            <button onclick="copyCode('codeInstallLibs')" class="text-purple-300 hover:text-white flex items-center gap-1 text-[11px]">
+                                <i data-lucide="copy" class="w-3.5 h-3.5"></i> Salin Semua Perintah
+                            </button>
+                        </div>
+                        <pre id="codeInstallLibs" class="overflow-x-auto text-emerald-400 leading-relaxed"><code># 1. Upgrade pip ke versi paling baru
+python -m pip install --upgrade pip
+
+# 2. Install seluruh paket workshop sekaligus
+pip install smolagents flask flask-cors pyautogui pyperclip requests python-dotenv duckduckgo-search openai</code></pre>
+                    </div>
+
+                    <div class="text-xs text-slate-500 flex items-center gap-2">
+                        <i data-lucide="folder-check" class="w-4 h-4 text-emerald-600"></i>
+                        <span>Atau jika Anda memiliki file <code>requirements.txt</code> di folder: jalankan <code>pip install -r requirements.txt</code></span>
+                    </div>
+                </div>
+
+                <!-- Table Explaining Each Library -->
+                <h4 class="text-sm font-bold text-slate-900 mb-3 flex items-center gap-2">
+                    <i data-lucide="layers" class="w-4 h-4 text-purple-600"></i> Detail Fungsi Setiap Library di Workshop
+                </h4>
+                <div class="overflow-x-auto rounded-2xl border border-slate-200">
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-slate-100 text-slate-700 uppercase tracking-wider font-bold border-b border-slate-200">
+                            <tr>
+                                <th class="p-3.5 sm:px-4">Nama Library</th>
+                                <th class="p-3.5 sm:px-4">Kategori</th>
+                                <th class="p-3.5 sm:px-4">Fungsi dalam Lab</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-slate-600 bg-white">
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="p-3.5 sm:px-4 font-mono font-bold text-slate-900">smolagents</td>
+                                <td class="p-3.5 sm:px-4"><span class="px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200 text-[10px] font-bold">Framework AI</span></td>
+                                <td class="p-3.5 sm:px-4">Framework agen cerdas ringan dari Hugging Face yang menggerakkan siklus ReAct (Reason + Action) dan Tool Calling.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="p-3.5 sm:px-4 font-mono font-bold text-slate-900">flask &amp; flask-cors</td>
+                                <td class="p-3.5 sm:px-4"><span class="px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 text-[10px] font-bold">Web Server</span></td>
+                                <td class="p-3.5 sm:px-4">Menyediakan REST API endpoint (<code>/chat</code>) untuk menghubungkan antarmuka frontend HTML dengan backend agent Python.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="p-3.5 sm:px-4 font-mono font-bold text-slate-900">pyautogui</td>
+                                <td class="p-3.5 sm:px-4"><span class="px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200 text-[10px] font-bold">Desktop RPA</span></td>
+                                <td class="p-3.5 sm:px-4">Mengendalikan mouse dan pengetikan keyboard otomatis ke aplikasi desktop Microsoft Word secara otonom.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="p-3.5 sm:px-4 font-mono font-bold text-slate-900">pyperclip</td>
+                                <td class="p-3.5 sm:px-4"><span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-300 text-[10px] font-bold">Clipboard Tool</span></td>
+                                <td class="p-3.5 sm:px-4">Menjamin teks bahasa Indonesia, karakter aksara, dan emoji tidak hilang saat ditempelkan (paste) ke Microsoft Word.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="p-3.5 sm:px-4 font-mono font-bold text-slate-900">duckduckgo-search</td>
+                                <td class="p-3.5 sm:px-4"><span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold">Live Search</span></td>
+                                <td class="p-3.5 sm:px-4">Memungkinkan agent berselancar ke internet untuk mengambil fakta dan berita terkini secara real-time tanpa perlu API key berbayar.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="p-3.5 sm:px-4 font-mono font-bold text-slate-900">python-dotenv</td>
+                                <td class="p-3.5 sm:px-4"><span class="px-2 py-0.5 rounded-full bg-rose-50 text-rose-700 border border-rose-200 text-[10px] font-bold">Keamanan</span></td>
+                                <td class="p-3.5 sm:px-4">Membaca kredensial API Key dari berkas rahasia <code>.env</code> sehingga kunci tidak ter-hardcode di script Python.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- STEP 5: CONFIG API KEY (.ENV) -->
+            <section class="light-card rounded-3xl p-6 sm:p-8">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-800 font-extrabold flex items-center justify-center text-sm">5</div>
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900">Mendapatkan &amp; Mengonfigurasi API Key Google AI Studio (.env)</h3>
+                        <p class="text-xs text-slate-500">Kredensial gratis untuk mengakses model Gemini 3.6 Flash</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="space-y-4 text-xs text-slate-600">
+                        <ol class="list-decimal list-inside space-y-2.5 leading-relaxed">
+                            <li>
+                                Buka browser Anda dan kunjungi portal resmi Google AI Studio:
+                                <a href="https://aistudio.google.com/apikey" target="_blank" class="text-brand-600 font-bold hover:underline inline-flex items-center gap-1 ml-1">
+                                    <span>aistudio.google.com/apikey</span>
+                                    <i data-lucide="external-link" class="w-3 h-3"></i>
+                                </a>
+                            </li>
+                            <li>Masuk (Sign in) menggunakan akun Google pribadi Anda.</li>
+                            <li>Klik tombol biru <strong class="text-slate-900">"Create API key"</strong>.</li>
+                            <li>Pilih proyek Google Cloud baru atau yang sudah ada, lalu klik <strong class="text-slate-900">"Create key in new project"</strong>.</li>
+                            <li>Salin string API key yang muncul (diawali dengan <code>AIzaSy...</code>).</li>
+                            <li>Buat file bernama persis <code class="bg-slate-200 px-1 py-0.5 rounded font-mono font-bold text-slate-800">.env</code> di dalam folder proyek Anda.</li>
+                        </ol>
+
+                        <div class="bg-rose-50 border border-rose-200 rounded-xl p-3.5 text-rose-900">
+                            <strong class="font-bold flex items-center gap-1.5 mb-1">
+                                <i data-lucide="shield-alert" class="w-4 h-4 text-rose-600"></i> Peringatan Privasi:
+                            </strong>
+                            Jangan pernah membagikan atau mengunggah berkas <code>.env</code> ke repository publik GitHub!
+                        </div>
+                    </div>
+
+                    <!-- Env Code Box -->
+                    <div class="bg-slate-900 rounded-2xl p-5 border border-slate-800 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-3">
+                                <span class="font-mono text-xs text-slate-300 font-bold flex items-center gap-1.5">
+                                    <i data-lucide="file-key" class="w-3.5 h-3.5 text-amber-400"></i> .env
+                                </span>
+                                <div class="flex items-center gap-2">
+                                    <button onclick="downloadSingleFile('.env', getEnvSource())" class="text-[11px] text-slate-300 hover:text-white bg-slate-800 px-2.5 py-1 rounded-lg flex items-center gap-1">
+                                        <i data-lucide="download" class="w-3 h-3"></i> Unduh
+                                    </button>
+                                    <button onclick="copyCode('env-code')" class="text-[11px] text-amber-300 hover:text-white bg-amber-600/30 hover:bg-amber-600/50 px-2.5 py-1 rounded-lg flex items-center gap-1 font-semibold">
+                                        <i data-lucide="copy" class="w-3 h-3"></i> Salin
+                                    </button>
+                                </div>
+                            </div>
+                            <pre id="env-code" class="font-mono text-xs text-slate-200 overflow-x-auto leading-relaxed"><code># Konfigurasi Kunci API Google AI Studio (Gemini)
+# Dapatkan gratis di: https://aistudio.google.com/apikey
+GOOGLE_API_KEY=AIzaSy_GANTI_DENGAN_KEY_ANDA_DISINI</code></pre>
+                        </div>
+                        <p class="text-[11px] text-slate-400 mt-4">
+                            Ganti teks <code>AIzaSy_GANTI_DENGAN_KEY_ANDA_DISINI</code> dengan API Key yang Anda salin dari Google AI Studio.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STEP 6: SMOKE TEST / VALIDATION -->
+            <section class="light-card rounded-3xl p-6 sm:p-8 bg-gradient-to-b from-white to-emerald-50/20 border-emerald-200/80">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 font-extrabold flex items-center justify-center text-sm">6</div>
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900">Uji Validasi Lingkungan (Smoke Test)</h3>
+                        <p class="text-xs text-slate-500">Memastikan semua library terpasang dan API Key terbaca sempurna</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div>
+                        <p class="text-xs text-slate-600 mb-3 leading-relaxed">
+                            Buat file pengujian sederhana bernama <code>test_env.py</code> di folder proyek Anda untuk memeriksa kesiapan sistem:
+                        </p>
+                        <div class="bg-slate-900 rounded-2xl p-4 font-mono text-xs text-slate-200 border border-slate-800 shadow-inner">
+                            <div class="flex items-center justify-between border-b border-slate-800 pb-2.5 mb-2.5">
+                                <span class="text-slate-400 text-[11px]">test_env.py</span>
+                                <button onclick="copyCode('codeTestEnv')" class="text-emerald-300 hover:text-white flex items-center gap-1 text-[11px]">
+                                    <i data-lucide="copy" class="w-3 h-3"></i> Salin Script
+                                </button>
+                            </div>
+                            <pre id="codeTestEnv" class="overflow-x-auto text-emerald-400 leading-relaxed"><code>import os
+from dotenv import load_dotenv
+
+load_dotenv()
+key = os.getenv("GOOGLE_API_KEY")
+
+print("🔍 Memeriksa dependensi...")
+try:
+    import smolagents
+    import flask
+    import pyautogui
+    import pyperclip
+    import requests
+    print("✅ Semua library berhasil di-import!")
+except ImportError as e:
+    print(f"❌ Ada library yang kurang: {e}")
+
+if key and not key.startswith("AIzaSy_GANTI"):
+    print(f"✅ GOOGLE_API_KEY ditemukan: {key[:8]}... (Valid)")
+else:
+    print("⚠️ GOOGLE_API_KEY belum diset dengan benar di file .env")</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Jalankan di terminal:</h4>
+                            <div class="bg-slate-900 text-slate-200 font-mono text-xs p-3.5 rounded-xl border border-slate-800 mb-4 flex items-center justify-between">
+                                <code>python test_env.py</code>
+                                <button onclick="copyRawText('python test_env.py')" class="text-slate-400 hover:text-white"><i data-lucide="copy" class="w-3.5 h-3.5"></i></button>
+                            </div>
+
+                            <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Output yang diharapkan:</h4>
+                            <div class="bg-slate-950 text-emerald-400 font-mono text-xs p-3.5 rounded-xl border border-slate-800 leading-relaxed shadow-inner">
+                                <div>🔍 Memeriksa dependensi...</div>
+                                <div>✅ Semua library berhasil di-import!</div>
+                                <div>✅ GOOGLE_API_KEY ditemukan: AIzaSyD... (Valid)</div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-emerald-100 flex items-center gap-3">
+                            <i data-lucide="party-popper" class="w-5 h-5 text-emerald-600 flex-shrink-0"></i>
+                            <p class="text-xs text-emerald-800 font-medium">
+                                Selamat! Lingkungan workshop Anda sudah siap 100%. Anda kini siap melangkah ke <strong>Lab 1</strong>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bottom Navigation -->
+            <div class="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-slate-200">
+                <a href="index.html" class="flex items-center gap-2 text-xs font-semibold px-4 py-2.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 shadow-xs transition">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                    <span>Kembali ke Beranda</span>
+                </a>
+                <a href="lab1.html" class="flex items-center gap-2 text-xs font-bold px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white shadow-md shadow-brand-500/25 transition transform hover:-translate-y-0.5">
+                    <span>Lanjut ke Lab 1: Fondasi Agentic AI</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200/80 py-6 bg-white text-[11px] text-slate-500 text-center mt-12">
+        <div class="max-w-7xl mx-auto px-4 space-y-1.5">
+            <div class="flex items-center justify-center gap-2 flex-wrap font-normal text-slate-600">
+                <span>Workshop Building Agentic AI Applications &copy; 2026</span>
+                <span class="text-slate-300">•</span>
+                <span class="inline-flex items-center gap-1.5 bg-slate-50 px-2 py-0.5 rounded-md border border-slate-200/50 text-[10px]">
+                    <span class="text-slate-400">In Collaboration with</span>
+                    <img src="IMG_Logo.png" alt="ASTRAtech Logo" class="h-3.5 sm:h-4 w-auto object-contain opacity-90" />
+                </span>
+            </div>
+            <p class="text-[10px] text-slate-400">Teknologi: smolagents, Google Gemini 3.6 Flash, Flask, PyAutoGUI, &amp; Tailwind CSS.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 text-white border border-slate-800 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2.5 text-xs font-semibold">
+        <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400" id="toastIcon"></i>
+        <span id="toastMsg">Teks berhasil disalin ke clipboard!</span>
+    </div>
+
+    <!-- Download Modal -->
+    <div id="downloadModal" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm hidden flex items-center justify-center p-4 transition-all">
+        <div class="bg-white w-full max-w-md rounded-2xl p-6 border border-slate-200 shadow-2xl relative animate-scaleUp">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+                <h4 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                    <i data-lucide="download-cloud" class="w-5 h-5 text-brand-600"></i> Export Script Workshop
+                </h4>
+                <button onclick="closeModal('downloadModal')" class="text-slate-400 hover:text-slate-700 p-1">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+                Pilih file yang ingin langsung Anda unduh ke folder laptop Anda:
+            </p>
+            <div class="space-y-2 text-xs">
+                <button onclick="downloadSingleFile('requirements.txt', getRequirementsSource())" class="w-full text-left p-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 flex items-center justify-between text-slate-800 font-semibold transition">
+                    <span class="font-mono">requirements.txt (Daftar Dependensi)</span>
+                    <i data-lucide="download" class="w-4 h-4 text-purple-600"></i>
+                </button>
+                <button onclick="downloadSingleFile('.env', getEnvSource())" class="w-full text-left p-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 flex items-center justify-between text-slate-800 font-semibold transition">
+                    <span class="font-mono">.env (Template API Key)</span>
+                    <i data-lucide="download" class="w-4 h-4 text-amber-600"></i>
+                </button>
+                <button onclick="downloadSingleFile('test_env.py', getTestEnvSource())" class="w-full text-left p-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 flex items-center justify-between text-slate-800 font-semibold transition">
+                    <span class="font-mono">test_env.py (Script Smoke Test)</span>
+                    <i data-lucide="download" class="w-4 h-4 text-emerald-600"></i>
+                </button>
+            </div>
+            <div class="mt-5 text-center">
+                <button onclick="closeModal('downloadModal')" class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-700 transition">
+                    Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            initScrollProgress();
+            initMobileMenu();
+        });
+
+        function initScrollProgress() {
+            window.addEventListener('scroll', () => {
+                const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = (window.pageYOffset / totalHeight) * 100;
+                document.getElementById('scrollProgress').style.width = progress + '%';
+            });
+        }
+
+        function initMobileMenu() {
+            const btn = document.getElementById('mobileMenuBtn');
+            const drawer = document.getElementById('mobileDrawer');
+            if (btn && drawer) {
+                btn.addEventListener('click', () => drawer.classList.toggle('hidden'));
+            }
+        }
+
+        function switchOsTab(os) {
+            const btnWin = document.getElementById('tabBtnWin');
+            const btnMac = document.getElementById('tabBtnMac');
+            const btnLinux = document.getElementById('tabBtnLinux');
+            const contentWin = document.getElementById('osContentWin');
+            const contentMac = document.getElementById('osContentMac');
+            const contentLinux = document.getElementById('osContentLinux');
+
+            // Reset
+            [btnWin, btnMac, btnLinux].forEach(b => {
+                b.className = 'px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center gap-2 transition';
+            });
+            [contentWin, contentMac, contentLinux].forEach(c => c.classList.add('hidden'));
+
+            if (os === 'win') {
+                btnWin.className = 'px-4 py-2 rounded-xl text-xs font-bold bg-brand-600 text-white flex items-center gap-2 transition shadow-xs';
+                contentWin.classList.remove('hidden');
+            } else if (os === 'mac') {
+                btnMac.className = 'px-4 py-2 rounded-xl text-xs font-bold bg-brand-600 text-white flex items-center gap-2 transition shadow-xs';
+                contentMac.classList.remove('hidden');
+            } else if (os === 'linux') {
+                btnLinux.className = 'px-4 py-2 rounded-xl text-xs font-bold bg-brand-600 text-white flex items-center gap-2 transition shadow-xs';
+                contentLinux.classList.remove('hidden');
+            }
+            lucide.createIcons();
+        }
+
+        function showToast(message, isSuccess = true) {
+            const toast = document.getElementById('toast');
+            const msgEl = document.getElementById('toastMsg');
+            const iconEl = document.getElementById('toastIcon');
+
+            msgEl.innerText = message;
+            if (isSuccess) {
+                iconEl.setAttribute('data-lucide', 'check-circle');
+                iconEl.className = 'w-4 h-4 text-emerald-400';
+            } else {
+                iconEl.setAttribute('data-lucide', 'alert-circle');
+                iconEl.className = 'w-4 h-4 text-amber-400';
+            }
+            lucide.createIcons();
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2500);
+        }
+
+        function copyCode(elementId) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+            copyRawText(el.innerText);
+        }
+
+        function copyRawText(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showToast('Kode berhasil disalin ke clipboard!');
+                } else {
+                    showToast('Silakan seleksi dan salin manual', false);
+                }
+            } catch (err) {
+                showToast('Gagal menyalin: ' + err.message, false);
+            } finally {
+                document.body.removeChild(textarea);
+            }
+        }
+
+        function getRequirementsSource() {
+            return `smolagents>=1.0.0\nflask>=3.0.0\nflask-cors>=4.0.0\npyautogui>=0.9.54\npyperclip>=1.8.2\nrequests>=2.31.0\npython-dotenv>=1.0.0\nduckduckgo-search>=6.0.0\nopenai>=1.40.0\n`;
+        }
+
+        function getEnvSource() {
+            return document.getElementById('env-code').innerText;
+        }
+
+        function getTestEnvSource() {
+            return document.getElementById('codeTestEnv').innerText;
+        }
+
+        function downloadSingleFile(filename, content) {
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast(`File "${filename}" berhasil diunduh!`);
+        }
+
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) modal.classList.remove('hidden');
+        }
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) modal.classList.add('hidden');
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan Solusi Error &amp; Troubleshooting | Workshop Agentic AI</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f5ff',
+                            100: '#e0ebff',
+                            200: '#bae0ff',
+                            400: '#4096ff',
+                            500: '#1677ff',
+                            600: '#0958d9',
+                            700: '#003eb3',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        .glass-header {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .light-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .light-card:hover {
+            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+            border-color: #cbd5e1;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-900 font-sans antialiased min-h-screen flex flex-col selection:bg-amber-500 selection:text-white">
+
+    <!-- Scroll Progress -->
+    <div id="scrollProgress" class="fixed top-0 left-0 h-1 bg-gradient-to-r from-amber-600 via-rose-600 to-indigo-600 z-50 transition-all duration-150" style="width: 0%;"></div>
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-40 glass-header">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 py-3.5 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3.5 group">
+                <div class="h-10 w-10 rounded-2xl bg-white shadow-sm border border-slate-200/80 p-1 flex items-center justify-center group-hover:scale-105 transition">
+                    <img src="IMG_Logo.png" alt="ASTRAtech Logo" class="h-full w-full object-contain" />
+                </div>
+                <div>
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-brand-600 block leading-none mb-1">Workshop Guide</span>
+                    <h1 class="text-base font-bold text-slate-900 tracking-tight">Agentic AI Applications</h1>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-1 text-xs font-semibold text-slate-600 bg-slate-100/80 p-1.5 rounded-xl border border-slate-200/60">
+                <a href="index.html" class="px-3 py-1.5 rounded-lg hover:text-brand-600 hover:bg-white transition duration-200">Beranda</a>
+                <a href="setup.html" class="px-3 py-1.5 rounded-lg hover:text-brand-600 hover:bg-white transition duration-200">Setup &amp; Instalasi</a>
+                <a href="lab1.html" class="px-3 py-1.5 rounded-lg hover:text-brand-600 hover:bg-white transition duration-200">Lab 1: Model</a>
+                <a href="lab2.html" class="px-3 py-1.5 rounded-lg hover:text-brand-600 hover:bg-white transition duration-200">Lab 2: Search</a>
+                <a href="lab3.html" class="px-3 py-1.5 rounded-lg hover:text-brand-600 hover:bg-white transition duration-200">Lab 3: Custom Tool</a>
+                <a href="lab4.html" class="px-3 py-1.5 rounded-lg hover:text-indigo-600 hover:bg-white transition duration-200 text-indigo-700 font-bold">Lab 4: Full-Stack</a>
+                <a href="troubleshooting.html" class="px-3 py-1.5 rounded-lg bg-white text-amber-700 font-bold shadow-xs">Solusi Error</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="flex items-center gap-2">
+                <a href="index.html" class="flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white shadow-sm transition transform hover:-translate-y-0.5">
+                    <i data-lucide="home" class="w-3.5 h-3.5"></i>
+                    <span>Beranda Utama</span>
+                </a>
+                <button id="mobileMenuBtn" class="md:hidden p-2 rounded-xl bg-slate-100 text-slate-600 hover:text-slate-900 border border-slate-200">
+                    <i data-lucide="menu" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobileDrawer" class="hidden md:hidden pt-4 pb-2 border-t border-slate-200 mt-2 space-y-1 bg-white rounded-2xl p-3 shadow-lg mx-4">
+            <a href="index.html" class="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50">Beranda Portal</a>
+            <a href="setup.html" class="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50">1. Setup &amp; Instalasi Python</a>
+            <a href="lab1.html" class="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50">2. Lab 1: Fondasi Agentic AI</a>
+            <a href="lab2.html" class="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50">3. Lab 2: Web Browsing Agent</a>
+            <a href="lab3.html" class="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50">4. Lab 3: Custom Tools @tool</a>
+            <a href="lab4.html" class="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50">5. Lab 4: Full-Stack &amp; MS Word</a>
+            <a href="troubleshooting.html" class="block px-3 py-2 rounded-lg text-sm bg-amber-50 text-amber-700 font-bold">6. Solusi &amp; Troubleshooting</a>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- Breadcrumb & Hero -->
+        <div class="border-b border-slate-200 bg-white">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8 py-8 lg:py-12">
+                <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-3">
+                    <a href="index.html" class="hover:text-brand-600 flex items-center gap-1">
+                        <i data-lucide="home" class="w-3.5 h-3.5"></i> Beranda
+                    </a>
+                    <span>/</span>
+                    <a href="lab4.html" class="hover:text-brand-600">Lab 4</a>
+                    <span>/</span>
+                    <span class="text-amber-700 font-bold">Solusi Error &amp; Troubleshooting</span>
+                </div>
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold mb-3">
+                            <i data-lucide="shield-alert" class="w-3.5 h-3.5"></i> Masalah Nyata &amp; Solusi Teruji
+                        </div>
+                        <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-2">
+                            Panduan Troubleshooting &amp; Solusi Error Runtime
+                        </h2>
+                        <p class="text-sm sm:text-base text-slate-600 max-w-3xl leading-relaxed">
+                            Saat menghubungkan AI Agent ke OS desktop, port web server, dan API eksternal, seringkali terjadi hambatan teknis. Berikut adalah akar penyebab dan solusi kode teruji untuk mengatasinya.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 py-10 space-y-8">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- ISSUE 1 -->
+                <div class="light-card p-6 rounded-3xl border-rose-200/80 flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-2xl bg-rose-100 text-rose-700 flex items-center justify-center mb-4 font-bold">
+                            <i data-lucide="mouse-pointer-click" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900 mb-2">1. PyAutoGUI Fail-Safe Triggered</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                            <strong class="text-slate-900 font-semibold">Penyebab:</strong> Fitur keselamatan PyAutoGUI akan langsung menghentikan program jika kursor mouse tanpa sengaja tersentuh ke sudut layar (0,0) saat simulasi pengetikan berlangsung di Microsoft Word.
+                        </p>
+                    </div>
+                    <div>
+                        <span class="text-[11px] font-bold text-slate-700 block mb-1">Solusi Kode:</span>
+                        <div class="bg-slate-900 rounded-xl p-3 font-mono text-[11px] text-emerald-400 border border-slate-800">
+                            <code>import pyautogui<br>pyautogui.FAILSAFE = False</code>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ISSUE 2 -->
+                <div class="light-card p-6 rounded-3xl border-amber-200/80 flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center mb-4 font-bold">
+                            <i data-lucide="type" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900 mb-2">2. Karakter Indonesia Hilang di Word</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                            <strong class="text-slate-900 font-semibold">Penyebab:</strong> Fungsi <code>pyautogui.write()</code> menyimulasikan tombol keyboard fisik tata letak US-ASCII. Akibatnya tanda baca khusus, aksara, atau emoji akan terpotong atau hilang.
+                        </p>
+                    </div>
+                    <div>
+                        <span class="text-[11px] font-bold text-slate-700 block mb-1">Solusi Kode (Unicode Safe):</span>
+                        <div class="bg-slate-900 rounded-xl p-3 font-mono text-[11px] text-emerald-400 border border-slate-800">
+                            <code>import pyperclip, pyautogui<br>pyperclip.copy(text)<br>pyautogui.hotkey('ctrl', 'v')</code>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ISSUE 3 -->
+                <div class="light-card p-6 rounded-3xl border-blue-200/80 flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center mb-4 font-bold">
+                            <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900 mb-2">3. Empty Output / Tool Calling Response</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                            <strong class="text-slate-900 font-semibold">Penyebab:</strong> Respons kosong sesekali dapat dikembalikan oleh endpoint Gemini jika prompt terlalu kompleks dalam satu step tool calling.
+                        </p>
+                    </div>
+                    <div>
+                        <span class="text-[11px] font-bold text-slate-700 block mb-1">Solusi Logika:</span>
+                        <div class="bg-slate-900 rounded-xl p-3 font-mono text-[11px] text-emerald-400 border border-slate-800">
+                            <code># Menerapkan retry loop 3x<br># dan mode Word menggunakan<br># client OpenAI langsung</code>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ISSUE 4 -->
+                <div class="light-card p-6 rounded-3xl border-purple-200/80 flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center mb-4 font-bold">
+                            <i data-lucide="shield-off" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900 mb-2">4. PowerShell ExecutionPolicy Block</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                            <strong class="text-slate-900 font-semibold">Penyebab:</strong> Windows membatasi script eksekusi <code>Activate.ps1</code> secara default dengan pesan <em>"cannot be loaded because running scripts is disabled"</em>.
+                        </p>
+                    </div>
+                    <div>
+                        <span class="text-[11px] font-bold text-slate-700 block mb-1">Solusi Terminal:</span>
+                        <div class="bg-slate-900 rounded-xl p-3 font-mono text-[11px] text-emerald-400 border border-slate-800 overflow-x-auto">
+                            <code>Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass</code>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ISSUE 5 -->
+                <div class="light-card p-6 rounded-3xl border-slate-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-2xl bg-slate-100 text-slate-700 flex items-center justify-center mb-4 font-bold">
+                            <i data-lucide="network" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900 mb-2">5. Port 8000 Address Already in Use</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                            <strong class="text-slate-900 font-semibold">Penyebab:</strong> Server Flask sebelumnya belum di-stop (masih aktif di latar belakang) atau port 8000 sedang dipakai aplikasi lain.
+                        </p>
+                    </div>
+                    <div>
+                        <span class="text-[11px] font-bold text-slate-700 block mb-1">Solusi:</span>
+                        <div class="bg-slate-900 rounded-xl p-3 font-mono text-[11px] text-emerald-400 border border-slate-800">
+                            <code># Ganti port di lab4.py baris akhir:<br>app.run(port=8001, debug=True)</code>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ISSUE 6 -->
+                <div class="light-card p-6 rounded-3xl border-emerald-200/80 flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center mb-4 font-bold">
+                            <i data-lucide="key" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900 mb-2">6. Error 403 / 429 Google AI Studio</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                            <strong class="text-slate-900 font-semibold">Penyebab:</strong> Error 403 berarti <code>GOOGLE_API_KEY</code> di file <code>.env</code> salah/belum aktif. Error 429 berarti kuota request per menit terlampaui.
+                        </p>
+                    </div>
+                    <div>
+                        <span class="text-[11px] font-bold text-slate-700 block mb-1">Solusi:</span>
+                        <div class="bg-slate-900 rounded-xl p-3 font-mono text-[11px] text-emerald-400 border border-slate-800">
+                            <code># Generate key baru di aistudio<br># Tunggu 1-2 menit untuk 429</code>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-slate-200">
+                <a href="lab4.html" class="flex items-center gap-2 text-xs font-semibold px-4 py-2.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 shadow-xs transition">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                    <span>Kembali ke Lab 4</span>
+                </a>
+                <a href="index.html" class="flex items-center gap-2 text-xs font-bold px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white shadow-md transition transform hover:-translate-y-0.5">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    <span>Kembali ke Beranda Utama</span>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200/80 py-6 bg-white text-[11px] text-slate-500 text-center mt-12">
+        <div class="max-w-7xl mx-auto px-4 space-y-1.5">
+            <div class="flex items-center justify-center gap-2 flex-wrap font-normal text-slate-600">
+                <span>Workshop Building Agentic AI Applications &copy; 2026</span>
+                <span class="text-slate-300">•</span>
+                <span class="inline-flex items-center gap-1.5 bg-slate-50 px-2 py-0.5 rounded-md border border-slate-200/50 text-[10px]">
+                    <span class="text-slate-400">In Collaboration with</span>
+                    <img src="IMG_Logo.png" alt="ASTRAtech Logo" class="h-3.5 sm:h-4 w-auto object-contain opacity-90" />
+                </span>
+            </div>
+            <p class="text-[10px] text-slate-400">Teknologi: smolagents, Google Gemini 3.6 Flash, Flask, PyAutoGUI, &amp; Tailwind CSS.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            initScrollProgress();
+            initMobileMenu();
+        });
+
+        function initScrollProgress() {
+            window.addEventListener('scroll', () => {
+                const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = (window.pageYOffset / totalHeight) * 100;
+                document.getElementById('scrollProgress').style.width = progress + '%';
+            });
+        }
+
+        function initMobileMenu() {
+            const btn = document.getElementById('mobileMenuBtn');
+            const drawer = document.getElementById('mobileDrawer');
+            if (btn && drawer) {
+                btn.addEventListener('click', () => drawer.classList.toggle('hidden'));
+            }
+        }
+    </script>
+</body>
+
+</html>
