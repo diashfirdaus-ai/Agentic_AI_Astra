@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 5: Hermes Desktop Agent (Full GUI / No-Code Agentic AI &amp; Computer Use) | Workshop</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f5ff',
+                            100: '#e0ebff',
+                            200: '#bae0ff',
+                            400: '#4096ff',
+                            500: '#1677ff',
+                            600: '#0958d9',
+                            700: '#003eb3',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        .glass-header {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .light-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .light-card:hover {
+            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+            border-color: #cbd5e1;
+        }
+
+        .gradient-text-hero {
+            background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 50%, #a855f7 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-900 font-sans antialiased min-h-screen flex flex-col selection:bg-purple-500 selection:text-white">
+
+    <!-- Scroll Progress -->
+    <div id="scrollProgress" class="fixed top-0 left-0 h-1 bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-600 z-50 transition-all duration-150" style="width: 0%;"></div>
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-40 glass-header">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 py-3.5 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3.5 group">
+                <div class="h-10 w-10 rounded-2xl bg-white shadow-sm border border-slate-200/80 p-1 flex items-center justify-center group-hover:scale-105 transition">
+                    <img src="IMG_Logo.png" alt="ASTRAtech Logo" class="h-full w-full object-contain" />
+                </div>
+                <div>
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-brand-600 block leading-none mb-1">Workshop Guide</span>
+                    <h1 class="text-base font-bold text-slate-900 tracking-tight">Agentic AI Applications</h1>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-1 text-xs font-semibold text-slate-600 bg-slate-100/80 p-1.5 rounded-xl border border-slate-200/60">
+                <a href="index.html" class="px-3 py-1.5 rounded-lg hover:text-brand-600 hover:bg-white transition duration-200">Beranda</a>
+                <a href="setup.html" class="px-3 py-1.5 rounded-lg hover:text-brand-600 hover:bg-white transition duration-200">Setup</a>
+                <a href="lab1.html" class="px-3 py-1.5 rounded-lg hover:text-brand-600 hover:bg-white transition duration-200">Lab 1: Model</a>
+                <a href="lab2.html" class="px-3 py-1.5 rounded-lg hover:text-brand-600 hover:bg-white transition duration-200">Lab 2: Search</a>
+                <a href="lab3.html" class="px-3 py-1.5 rounded-lg hover:text-brand-600 hover:bg-white transition duration-200">Lab 3: Custom Tool</a>
+                <a href="lab4.html" class="px-3 py-1.5 rounded-lg hover:text-indigo-600 hover:bg-white transition duration-200">Lab 4: Full-Stack</a>
+                <a href="lab5.html" class="px-3 py-1.5 rounded-lg bg-white text-purple-700 font-bold shadow-xs">Lab 5: Hermes GUI</a>
+                <a href="troubleshooting.html" class="px-3 py-1.5 rounded-lg hover:text-amber-700 hover:bg-white transition duration-200 text-amber-700">Solusi Error</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="flex items-center gap-2">
+                <a href="https://hermes-agent.nousresearch.com/desktop" target="_blank" class="flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2 rounded-xl bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 shadow-sm transition transform hover:-translate-y-0.5">
+                    <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                    <span class="hidden sm:inline">Download Hermes Desktop</span>
+                </a>
+                <a href="troubleshooting.html" class="flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white shadow-md transition transform hover:-translate-y-0.5">
+                    <span>Solusi Error</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+                <button id="mobileMenuBtn" class="md:hidden p-2 rounded-xl bg-slate-100 text-slate-600 hover:text-slate-900 border border-slate-200">
+                    <i data-lucide="menu" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobileDrawer" class="hidden md:hidden pt-4 pb-2 border-t border-slate-200 mt-2 space-y-1 bg-white rounded-2xl p-3 shadow-lg mx-4">
+            <a href="index.html" class="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50">Beranda Portal</a>
+            <a href="setup.html" class="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50">1. Setup &amp; Instalasi Python</a>
+            <a href="lab1.html" class="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50">2. Lab 1: Fondasi Agentic AI</a>
+            <a href="lab2.html" class="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50">3. Lab 2: Web Browsing Agent</a>
+            <a href="lab3.html" class="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50">4. Lab 3: Custom Tools @tool</a>
+            <a href="lab4.html" class="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50">5. Lab 4: Full-Stack &amp; MS Word</a>
+            <a href="lab5.html" class="block px-3 py-2 rounded-lg text-sm bg-purple-50 text-purple-700 font-bold">6. Lab 5: Hermes Desktop (No-Code GUI)</a>
+            <a href="troubleshooting.html" class="block px-3 py-2 rounded-lg text-sm text-amber-700 hover:bg-amber-50">7. Solusi &amp; Troubleshooting</a>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- Breadcrumb & Hero -->
+        <div class="border-b border-slate-200 bg-white">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8 py-8 lg:py-12">
+                <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-3">
+                    <a href="index.html" class="hover:text-brand-600 flex items-center gap-1">
+                        <i data-lucide="home" class="w-3.5 h-3.5"></i> Beranda
+                    </a>
+                    <span>/</span>
+                    <a href="lab4.html" class="hover:text-brand-600">Lab 4</a>
+                    <span>/</span>
+                    <span class="text-purple-700 font-bold">Lab 5: Hermes Desktop GUI</span>
+                </div>
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 border border-purple-200 text-purple-700 text-xs font-bold mb-3">
+                            <i data-lucide="layout" class="w-3.5 h-3.5"></i> Modul Tambahan: 100% Full GUI / No-Code Agent
+                        </div>
+                        <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-2">
+                            Lab 5: Hermes Desktop Agent (Computer Use &amp; GUI Gemini)
+                        </h2>
+                        <p class="text-sm sm:text-base text-slate-600 max-w-3xl leading-relaxed">
+                            Bagi yang menginginkan pengalaman <strong>Full GUI / Desktop Native tanpa menyentuh PowerShell, CMD, WSL, atau terminal sama sekali</strong>. Menjalankan Hermes Desktop di Windows 10/11 dengan otak Google Gemini dan kemampuan Computer Use.
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs px-3.5 py-1.5 rounded-full bg-purple-100 text-purple-800 border border-purple-200 font-bold flex items-center gap-1.5">
+                            <i data-lucide="mouse-pointer" class="w-4 h-4"></i> No-Code / Pure Desktop
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 py-10 space-y-12">
+
+            <!-- HIGHLIGHT BANNER: ZERO TERMINAL -->
+            <div class="bg-gradient-to-r from-purple-500/10 via-indigo-500/10 to-blue-500/10 border border-purple-200/80 rounded-3xl p-6 sm:p-8">
+                <div class="flex items-start gap-4">
+                    <div class="p-3 bg-purple-600 text-white rounded-2xl shadow-md shadow-purple-500/30 flex-shrink-0">
+                        <i data-lucide="sparkles" class="w-6 h-6"></i>
+                    </div>
+                    <div class="space-y-2">
+                        <h3 class="text-base sm:text-lg font-bold text-slate-900">100% Full GUI Experience — Tanpa Terminal &amp; Tanpa Menulis Script .env</h3>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            Hermes menyediakan aplikasi desktop native untuk Windows 10/11. Yang terpenting: <strong>API Google Gemini didukung secara native</strong> dan dapat dikonfigurasi langsung dari jendela menu Settings Hermes Desktop. Anda tidak perlu mengetik perintah terminal, tidak perlu menginstal Python runtime manual, dan tidak perlu membuat file konfigurasi teks.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SKEMA ARSITEKTUR HERMES DESKTOP -->
+            <section class="light-card rounded-3xl p-6 sm:p-8 border-purple-200/80">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-9 h-9 rounded-xl bg-purple-100 text-purple-700 font-extrabold flex items-center justify-center text-sm">
+                        <i data-lucide="cpu" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900">Skema Arsitektur Sistem Hermes Desktop</h3>
+                        <p class="text-xs text-slate-500">Aliran interaksi dari antarmuka GUI, model Gemini, hingga kontrol desktop</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-950 rounded-2xl p-6 font-mono text-xs text-slate-200 border border-slate-800 shadow-inner overflow-x-auto leading-relaxed">
+                    <div class="text-purple-400 font-bold mb-2">┌─────────────────────────────────────────────────────────────────────────┐</div>
+                    <div class="text-purple-400 font-bold">│                            HERMES DESKTOP                               │</div>
+                    <div class="text-purple-400 font-bold">│                                                                         │</div>
+                    <div>│   💬 Chat Interface                                                     │</div>
+                    <div>│   ├── 🧠 Gemini Model Brain (Google AI Studio)                          │</div>
+                    <div>│   ├── 📁 File access (Baca & Tulis Dokumen / Source Code)               │</div>
+                    <div>│   ├── 🌐 Browser Engine (Web Scraping & Live Grounding)                 │</div>
+                    <div>│   ├── 🖥️ Computer Use (Otomasi Windows UI: Klik, Ketik, Drag & Drop)    │</div>
+                    <div>│   ├── 🐍 Python / Code Execution Sandbox                                │</div>
+                    <div>│   ├── 🔌 MCP (Model Context Protocol) Server Connector                  │</div>
+                    <div>│   └── ⚡ Skills & Autonomous Workflows                                  │</div>
+                    <div class="text-purple-400 font-bold">└────────────────────────────────────┬────────────────────────────────────┘</div>
+                    <div class="text-slate-400">                                     │</div>
+                    <div class="text-emerald-400 font-bold">                                     ▼ Google AI Studio API</div>
+                    <div class="text-slate-400">                                     │</div>
+                    <div class="text-cyan-400 font-bold">                                     ▼ Gemini Flash / Pro Model</div>
+                </div>
+            </section>
+
+            <!-- STEP 1: DOWNLOAD HERMES DESKTOP -->
+            <section class="light-card rounded-3xl p-6 sm:p-8">
+                <div class="flex items-center justify-between flex-wrap gap-3 mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-700 font-extrabold flex items-center justify-center text-sm">1</div>
+                        <div>
+                            <h3 class="text-lg sm:text-xl font-bold text-slate-900">Download &amp; Instalasi Hermes Desktop</h3>
+                            <p class="text-xs text-slate-500">Installer resmi biner native Windows 10/11</p>
+                        </div>
+                    </div>
+                    <a href="https://hermes-agent.nousresearch.com/desktop" target="_blank" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold transition shadow-sm">
+                        <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                        <span>Buka Halaman Download Resmi</span>
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 text-xs text-slate-600 pt-2">
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200">
+                        <div class="font-bold text-slate-900 text-sm mb-2 flex items-center gap-2">
+                            <i data-lucide="download" class="w-4 h-4 text-brand-600"></i> Unduh File .exe
+                        </div>
+                        <p class="leading-relaxed">
+                            Buka tautan resmi <a href="https://hermes-agent.nousresearch.com/desktop" target="_blank" class="text-brand-600 font-semibold underline">hermes-agent.nousresearch.com/desktop</a>. Di bagian Windows, pilih <strong>Download desktop app</strong>.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200">
+                        <div class="font-bold text-slate-900 text-sm mb-2 flex items-center gap-2">
+                            <i data-lucide="mouse-pointer-click" class="w-4 h-4 text-emerald-600"></i> Double-Click Install
+                        </div>
+                        <p class="leading-relaxed">
+                            Setelah file installer <code>.exe</code> selesai diunduh: cukup klik ganda (Double click) &rarr; Ikuti wizard &rarr; Klik <strong>Finish</strong>.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200">
+                        <div class="font-bold text-slate-900 text-sm mb-2 flex items-center gap-2">
+                            <i data-lucide="shield-check" class="w-4 h-4 text-purple-600"></i> Zero Command Line
+                        </div>
+                        <p class="leading-relaxed">
+                            Tidak perlu membuka PowerShell, CMD, atau WSL sama sekali. Semua binary runtime sudah terbungkus rapi di dalam aplikasi.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STEP 2: JALANKAN HERMES & PILIH PROVIDER -->
+            <section class="light-card rounded-3xl p-6 sm:p-8">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-9 h-9 rounded-xl bg-indigo-100 text-indigo-700 font-extrabold flex items-center justify-center text-sm">2</div>
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900">Jalankan Hermes Desktop &amp; Pilih Provider Google AI Studio</h3>
+                        <p class="text-xs text-slate-500">Membuka aplikasi dan memilih provider native</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="space-y-3 text-xs text-slate-600">
+                        <p class="leading-relaxed">
+                            Setelah instalasi selesai, buka aplikasi dari Start Menu Windows:
+                        </p>
+                        <div class="bg-slate-100 p-3 rounded-xl font-mono text-slate-800 font-bold flex items-center gap-2">
+                            <i data-lucide="search" class="w-4 h-4 text-slate-500"></i> Start Menu &rarr; Ketik "Hermes" &rarr; Buka
+                        </div>
+                        <p class="leading-relaxed">
+                            Pada peluncuran pertama (First Launch), Hermes akan menampilkan layar <strong>Onboarding</strong> untuk memilih provider LLM:
+                        </p>
+                        <ul class="space-y-1.5 list-disc list-inside text-slate-700">
+                            <li>Nous</li>
+                            <li>OpenAI</li>
+                            <li>Anthropic</li>
+                            <li class="text-brand-600 font-bold font-mono">Google AI Studio (Pilih ini!)</li>
+                        </ul>
+                        <p class="leading-relaxed bg-blue-50 border border-blue-200 p-3 rounded-xl text-blue-900">
+                            <i data-lucide="info" class="w-4 h-4 text-blue-600 inline mr-1"></i>
+                            Hermes mendukung Gemini secara native, bukan melalui OpenAI-compatible endpoint alternatif, sehingga fitur function calling dan respons multimodal berjalan optimal.
+                        </p>
+                    </div>
+
+                    <!-- UI Mockup -->
+                    <div class="bg-slate-950 rounded-2xl p-5 font-mono text-xs text-slate-200 border border-slate-800 shadow-inner">
+                        <div class="text-purple-400 font-bold mb-2">┌────────────────────────────────────────────────────────┐</div>
+                        <div class="text-purple-400 font-bold">│                        HERMES                          │</div>
+                        <div>│                                                        │</div>
+                        <div class="text-white font-bold">│   Welcome to Hermes Desktop                            │</div>
+                        <div class="text-slate-400">│   Choose your primary LLM provider:                    │</div>
+                        <div>│                                                        │</div>
+                        <div class="text-slate-400">│   ○ Nous                                               │</div>
+                        <div class="text-slate-400">│   ○ OpenAI                                             │</div>
+                        <div class="text-slate-400">│   ○ Anthropic                                          │</div>
+                        <div class="text-emerald-400 font-bold">│   ● Google AI Studio (Gemini)                          │</div>
+                        <div class="text-slate-400">│   ○ Local Models (Ollama / LM Studio)                  │</div>
+                        <div>│                                                        │</div>
+                        <div>│   <span class="bg-brand-600 text-white px-3 py-1 rounded font-bold">[ Continue ]</span>                                 │</div>
+                        <div class="text-purple-400 font-bold">└────────────────────────────────────────────────────────┘</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STEP 3 & 4: INPUT API KEY & MODEL SELECTION -->
+            <section class="light-card rounded-3xl p-6 sm:p-8">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-800 font-extrabold flex items-center justify-center text-sm">3 &amp; 4</div>
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900">Input API Key &amp; Pemilihan Model Gemini via GUI</h3>
+                        <p class="text-xs text-slate-500">Tanpa file .env dan tanpa command line</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="space-y-4 text-xs text-slate-600">
+                        <ol class="list-decimal list-inside space-y-2.5 leading-relaxed">
+                            <li>
+                                Dapatkan API Key gratis di portal:
+                                <a href="https://aistudio.google.com/apikey" target="_blank" class="text-brand-600 font-bold underline inline-flex items-center gap-1 ml-1">
+                                    <span>aistudio.google.com/apikey</span>
+                                    <i data-lucide="external-link" class="w-3 h-3"></i>
+                                </a>
+                            </li>
+                            <li>Salin kunci Anda (berupa string seperti <code>AIzaSy...</code>).</li>
+                            <li>
+                                Di jendela Hermes Desktop, buka menu:
+                                <div class="font-mono bg-slate-100 p-2 rounded-lg font-bold text-slate-800 mt-1">
+                                    Settings &rarr; Providers &rarr; Google AI Studio
+                                </div>
+                            </li>
+                            <li>Tempel (Paste) API Key pada kolom isian, lalu klik tombol biru <strong class="text-slate-900">[ Save ]</strong>.</li>
+                            <li>
+                                Selanjutnya buka menu:
+                                <div class="font-mono bg-slate-100 p-2 rounded-lg font-bold text-slate-800 mt-1">
+                                    Settings &rarr; Model
+                                </div>
+                            </li>
+                            <li>
+                                Pilih model <strong class="text-indigo-700">Gemini Flash</strong> (misalnya <code>gemini-2.5-flash</code> atau <code>gemini-3.6-flash</code>).
+                            </li>
+                        </ol>
+
+                        <div class="bg-amber-50 border border-amber-300 rounded-xl p-3.5 text-amber-950 text-xs">
+                            <strong class="font-bold flex items-center gap-1.5 mb-1">
+                                <i data-lucide="alert-circle" class="w-4 h-4 text-amber-600"></i> Tips Kuota &amp; Kecepatan:
+                            </strong>
+                            Sangat disarankan memilih <strong>Gemini Flash</strong> untuk tahap awal, karena agent melakukan banyak pemanggilan model secara berantai (multi-call) saat membaca file atau berinteraksi dengan browser.
+                        </div>
+                    </div>
+
+                    <!-- GUI Settings Mockup -->
+                    <div class="bg-slate-950 rounded-2xl p-5 font-mono text-xs text-slate-200 border border-slate-800 shadow-inner flex flex-col justify-between">
+                        <div>
+                            <div class="text-slate-400 mb-2"># Settings &rarr; Providers &rarr; Google AI Studio</div>
+                            <div class="text-white font-bold mb-1">Google AI Studio API Key:</div>
+                            <div class="bg-slate-900 border border-slate-700 rounded-xl p-3 text-emerald-400 mb-3 flex items-center justify-between">
+                                <span>AIzaSyB8x9Q_EXAMPLE_KEY_SAVED...</span>
+                                <i data-lucide="check" class="w-4 h-4 text-emerald-400"></i>
+                            </div>
+                            <div class="text-white font-bold mb-1">Active Model Selection:</div>
+                            <div class="bg-slate-900 border border-indigo-500 rounded-xl p-3 text-indigo-300 mb-3 flex items-center justify-between">
+                                <span>Gemini 2.5/3.6 Flash (Fast &amp; Tool-Calling Optimized)</span>
+                                <i data-lucide="chevron-down" class="w-4 h-4 text-indigo-400"></i>
+                            </div>
+                        </div>
+                        <div class="pt-3 border-t border-slate-800 flex items-center justify-between">
+                            <span class="text-[11px] text-emerald-400 flex items-center gap-1">
+                                <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> Credentials Synced via Desktop UX
+                            </span>
+                            <span class="bg-brand-600 text-white px-3 py-1 rounded text-[11px] font-bold">[ Save Changes ]</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STEP 5 & 6: FIRST TEST & ENABLING TOOLS -->
+            <section class="light-card rounded-3xl p-6 sm:p-8">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 font-extrabold flex items-center justify-center text-sm">5 &amp; 6</div>
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900">Uji Koneksi Chat &amp; Aktivasi Tools / Toolsets</h3>
+                        <p class="text-xs text-slate-500">Memastikan komunikasi LLM lancar lalu mengaktifkan kemampuan otonom</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- First Chat Test -->
+                    <div class="space-y-3 text-xs text-slate-600">
+                        <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                            <i data-lucide="message-square" class="w-4 h-4 text-brand-600"></i> 1. Uji Coba Chat Pertama
+                        </h4>
+                        <p class="leading-relaxed">
+                            Jangan langsung mengaktifkan banyak alat. Masuk ke halaman <strong>Chat</strong> Hermes dan ketikkan salam perkenalan:
+                        </p>
+                        <div class="bg-slate-900 text-slate-100 p-4 rounded-xl border border-slate-800 space-y-2">
+                            <div class="text-slate-400 text-[11px]">Prompt Pengujian:</div>
+                            <div class="font-semibold text-emerald-400 select-all" id="promptTestGreeting">
+                                Halo Hermes. Perkenalkan dirimu dan jelaskan model Gemini yang sedang kamu gunakan.
+                            </div>
+                            <button onclick="copyCode('promptTestGreeting')" class="text-xs text-brand-300 hover:text-white flex items-center gap-1 mt-2">
+                                <i data-lucide="copy" class="w-3 h-3"></i> Salin Prompt
+                            </button>
+                        </div>
+                        <p class="text-[11px] text-emerald-700 flex items-center gap-1.5 font-medium">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i>
+                            Jika Hermes menjawab dengan perkenalan dan menyebut Gemini, koneksi ke Google AI Studio telah 100% berhasil!
+                        </p>
+                    </div>
+
+                    <!-- Enabling Tools -->
+                    <div class="space-y-3 text-xs text-slate-600">
+                        <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                            <i data-lucide="wrench" class="w-4 h-4 text-purple-600"></i> 2. Mengaktifkan Toolsets di Settings
+                        </h4>
+                        <p class="leading-relaxed">
+                            Buka menu <strong class="text-slate-900">Settings &rarr; Tools / Toolsets</strong>. Hermes Desktop menyediakan berbagai modul alat yang siap dicentang:
+                        </p>
+                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-2 font-mono">
+                            <div class="flex items-center gap-2 text-emerald-700 font-bold">
+                                <input type="checkbox" checked disabled class="rounded text-purple-600" />
+                                <span>File Operations (Baca, tulis, edit berkas lokal)</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-emerald-700 font-bold">
+                                <input type="checkbox" checked disabled class="rounded text-purple-600" />
+                                <span>Browser (Live search &amp; web browsing)</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-emerald-700 font-bold">
+                                <input type="checkbox" checked disabled class="rounded text-purple-600" />
+                                <span>Computer Use (Kendali UI Windows desktop)</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-slate-500">
+                                <input type="checkbox" disabled class="rounded text-purple-600" />
+                                <span>Code / Terminal Execution (Opsional lanjutan)</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-slate-500">
+                                <input type="checkbox" disabled class="rounded text-purple-600" />
+                                <span>MCP Server Integration (Model Context Protocol)</span>
+                            </div>
+                        </div>
+                        <p class="text-[11px] text-slate-500">
+                            <strong>Saran Praktis:</strong> Awali dengan 3 alat pertama (File, Browser, Computer Use) agar kontrol eksekusi agent tetap fokus dan stabil.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STEP 7 & 8: COMPUTER USE & DESKTOP CONTROL -->
+            <section class="light-card rounded-3xl p-6 sm:p-8 bg-gradient-to-r from-purple-50/40 via-white to-white border-purple-200/80">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-9 h-9 rounded-xl bg-purple-100 text-purple-700 font-extrabold flex items-center justify-center text-sm">
+                        <i data-lucide="monitor" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900">Fitur Bintang: Computer Use pada Windows UI</h3>
+                        <p class="text-xs text-slate-500">Mengoperasikan komputer layaknya asisten manusia di depan monitor</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="space-y-3 text-xs text-slate-600">
+                        <p class="leading-relaxed">
+                            Fitur <strong>Computer Use</strong> pada Hermes Desktop menggunakan modul <strong>Windows UI Automation</strong> native. Agent dapat melakukan tindakan visual secara langsung pada sistem operasi Anda:
+                        </p>
+                        <div class="grid grid-cols-2 gap-2.5 pt-1">
+                            <div class="bg-white border border-slate-200 p-3 rounded-xl flex items-center gap-2 font-medium text-slate-800">
+                                <i data-lucide="mouse-pointer" class="w-4 h-4 text-purple-600"></i> Klik Kiri / Kanan
+                            </div>
+                            <div class="bg-white border border-slate-200 p-3 rounded-xl flex items-center gap-2 font-medium text-slate-800">
+                                <i data-lucide="keyboard" class="w-4 h-4 text-indigo-600"></i> Mengetik Teks
+                            </div>
+                            <div class="bg-white border border-slate-200 p-3 rounded-xl flex items-center gap-2 font-medium text-slate-800">
+                                <i data-lucide="move" class="w-4 h-4 text-blue-600"></i> Scrolling Layar
+                            </div>
+                            <div class="bg-white border border-slate-200 p-3 rounded-xl flex items-center gap-2 font-medium text-slate-800">
+                                <i data-lucide="eye" class="w-4 h-4 text-emerald-600"></i> Membaca Interface
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flow Diagram -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 font-mono text-xs text-slate-200 shadow-inner">
+                        <div class="text-slate-400 mb-2"># Alur Eksekusi Computer Use:</div>
+                        <div class="text-white font-bold">Anda: "Buka Google Chrome dan cari dokumentasi resmi TensorFlow."</div>
+                        <div class="text-purple-400 mt-2">↓ [Hermes Reasoning]</div>
+                        <div class="text-slate-300">↓ [Computer Use: Windows UI Automation triggered]</div>
+                        <div class="text-emerald-400">↓ [Membuka aplikasi Chrome &rarr; Fokus ke address bar]</div>
+                        <div class="text-cyan-400">↓ [Mengetik URL / search query &rarr; Membaca snippet hasil]</div>
+                        <div class="text-emerald-300 font-bold mt-2">Selesai! Informasi tersaji di layar Anda.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- USE CASE 1, 2, 3: REAL-WORLD IMPLEMENTATIONS -->
+            <div class="space-y-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-600 text-white flex items-center justify-center font-bold text-sm">
+                        <i data-lucide="briefcase" class="w-4 h-4"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900">3 Skenario Praktik Nyata untuk Pengajar, Peneliti &amp; Developer</h3>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                    <!-- Scenario 1 -->
+                    <div class="light-card rounded-3xl p-6 flex flex-col justify-between border-blue-200/80">
+                        <div>
+                            <div class="w-10 h-10 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center mb-4 font-bold">
+                                <i data-lucide="folder-code" class="w-5 h-5"></i>
+                            </div>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-200 mb-2 inline-block">Skenario 1</span>
+                            <h4 class="text-base font-bold text-slate-900 mb-2">Otomasi Codebase &amp; Pembuatan README</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                                Misalnya Anda memiliki folder proyek lokal seperti <code>D:\Project\CPE\</code>. Minta Hermes menganalisis seluruh file secara mandiri:
+                            </p>
+                            <div class="bg-slate-900 p-3.5 rounded-xl text-slate-200 font-mono text-[11px] leading-relaxed border border-slate-800 select-all mb-3" id="promptScenario1">
+Buka folder project CPE saya di D:\Project\CPE\.
+Analisis struktur project tersebut.
+Jelaskan setiap file Python yang ada.
+Cari bagian yang menggunakan TensorFlow.
+Kemudian buatkan file README.md yang lengkap.
+Jangan mengubah source code yang ada.
+                            </div>
+                        </div>
+                        <button onclick="copyCode('promptScenario1')" class="text-xs font-semibold py-2 px-3 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 flex items-center justify-center gap-1.5 transition">
+                            <i data-lucide="copy" class="w-3.5 h-3.5"></i> Salin Prompt Skenario 1
+                        </button>
+                    </div>
+
+                    <!-- Scenario 2 -->
+                    <div class="light-card rounded-3xl p-6 flex flex-col justify-between border-purple-200/80">
+                        <div>
+                            <div class="w-10 h-10 rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center mb-4 font-bold">
+                                <i data-lucide="cpu" class="w-5 h-5"></i>
+                            </div>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-purple-700 bg-purple-50 px-2.5 py-0.5 rounded-full border border-purple-200 mb-2 inline-block">Skenario 2</span>
+                            <h4 class="text-base font-bold text-slate-900 mb-2">AI Coding &amp; Security Agent</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                                Hermes dapat difungsikan sebagai partner inspeksi kode cerdas untuk berbagai domain AI spesifik:
+                            </p>
+                            <div class="space-y-2 text-xs">
+                                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                                    <strong class="text-slate-900 block font-semibold mb-0.5">🐍 Python Debugging:</strong>
+                                    <span class="text-slate-600">"Analisis error program ini dan perbaiki bug logic-nya."</span>
+                                </div>
+                                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                                    <strong class="text-slate-900 block font-semibold mb-0.5">🧠 TensorFlow CNN:</strong>
+                                    <span class="text-slate-600">"Analisis arsitektur model CNN ini dan cari penyebab validation accuracy rendah."</span>
+                                </div>
+                                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                                    <strong class="text-slate-900 block font-semibold mb-0.5">📷 OpenCV Focus:</strong>
+                                    <span class="text-slate-600">"Periksa program camera focus ini dan optimalkan algoritma deteksi blur."</span>
+                                </div>
+                                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                                    <strong class="text-slate-900 block font-semibold mb-0.5">🛡️ LLM Security Audit:</strong>
+                                    <span class="text-slate-600">"Audit project ini dari perspektif prompt injection, data leakage &amp; model security."</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] text-purple-700 font-medium">
+                            <i data-lucide="check-circle" class="w-3.5 h-3.5 inline mr-1"></i> Arsitektur: File + Browser + Computer
+                        </div>
+                    </div>
+
+                    <!-- Scenario 3 -->
+                    <div class="light-card rounded-3xl p-6 flex flex-col justify-between border-emerald-200/80">
+                        <div>
+                            <div class="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center mb-4 font-bold">
+                                <i data-lucide="book-open" class="w-5 h-5"></i>
+                            </div>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 mb-2 inline-block">Skenario 3</span>
+                            <h4 class="text-base font-bold text-slate-900 mb-2">Autonomous Research Agent</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                                Hermes menjadi "operator AI" yang merangkum riset dari internet dan menyusun laporan terformat rapi:
+                            </p>
+                            <div class="bg-slate-950 p-4 rounded-xl font-mono text-xs text-slate-200 border border-slate-800 space-y-1 leading-relaxed">
+                                <div class="text-purple-400 font-bold">HERMES + GEMINI FLASH</div>
+                                <div class="text-slate-400">├── RESEARCH (Papers &amp; Literature)</div>
+                                <div class="text-slate-400">├── CODING (PyTorch / TensorFlow)</div>
+                                <div class="text-slate-400">├── COMPUTER (Windows Apps &amp; Browser)</div>
+                                <div class="text-emerald-400 font-bold">└── FINAL REPORT GENERATION</div>
+                                <div class="text-slate-300">    Format: Markdown / PDF / DOCX</div>
+                            </div>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] text-emerald-700 font-medium">
+                            <i data-lucide="award" class="w-3.5 h-3.5 inline mr-1"></i> Output langsung tersimpan ke sistem Windows
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- SUMMARY CHECKLIST -->
+            <div class="light-card rounded-3xl p-6 sm:p-8 bg-slate-900 text-white border-slate-800">
+                <div class="flex items-center gap-3 mb-4">
+                    <i data-lucide="list-checks" class="w-6 h-6 text-emerald-400"></i>
+                    <h3 class="text-lg font-bold">Ringkasan Langkah Eksekusi Lab 5 (Zero-Terminal)</h3>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs text-slate-300">
+                    <div class="bg-slate-800/80 p-4 rounded-2xl border border-slate-700">
+                        <span class="text-emerald-400 font-bold block mb-1">Langkah 1: Install</span>
+                        Unduh installer <code>.exe</code> dari web resmi Nous &amp; pasang di Windows 10/11.
+                    </div>
+                    <div class="bg-slate-800/80 p-4 rounded-2xl border border-slate-700">
+                        <span class="text-emerald-400 font-bold block mb-1">Langkah 2: API Key</span>
+                        Ambil key Google AI Studio &rarr; tempel di GUI <code>Settings &rarr; Providers</code>.
+                    </div>
+                    <div class="bg-slate-800/80 p-4 rounded-2xl border border-slate-700">
+                        <span class="text-emerald-400 font-bold block mb-1">Langkah 3: Model</span>
+                        Pilih <strong>Gemini Flash</strong> di menu <code>Settings &rarr; Model</code>.
+                    </div>
+                    <div class="bg-slate-800/80 p-4 rounded-2xl border border-slate-700">
+                        <span class="text-emerald-400 font-bold block mb-1">Langkah 4: Toolset</span>
+                        Centang <strong>File Operations</strong>, <strong>Browser</strong>, dan <strong>Computer Use</strong>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-slate-200">
+                <a href="lab4.html" class="flex items-center gap-2 text-xs font-semibold px-4 py-2.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 shadow-xs transition">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                    <span>Kembali ke Lab 4: Full-Stack</span>
+                </a>
+                <a href="troubleshooting.html" class="flex items-center gap-2 text-xs font-bold px-6 py-3 rounded-xl bg-amber-600 hover:bg-amber-700 text-white shadow-md shadow-amber-500/25 transition transform hover:-translate-y-0.5">
+                    <span>Lanjut ke Panduan Solusi Error &amp; Troubleshooting</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200/80 py-6 bg-white text-[11px] text-slate-500 text-center mt-12">
+        <div class="max-w-7xl mx-auto px-4 space-y-1.5">
+            <div class="flex items-center justify-center gap-2 flex-wrap font-normal text-slate-600">
+                <span>Workshop Building Agentic AI Applications &copy; 2026</span>
+                <span class="text-slate-300">•</span>
+                <span class="inline-flex items-center gap-1.5 bg-slate-50 px-2 py-0.5 rounded-md border border-slate-200/50 text-[10px]">
+                    <span class="text-slate-400">In Collaboration with</span>
+                    <img src="IMG_Logo.png" alt="ASTRAtech Logo" class="h-3.5 sm:h-4 w-auto object-contain opacity-90" />
+                </span>
+            </div>
+            <p class="text-[10px] text-slate-400">Teknologi: Hermes Desktop, Google Gemini 3.6 Flash, Windows UI Automation, &amp; Tailwind CSS.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 text-white border border-slate-800 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2.5 text-xs font-semibold">
+        <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400" id="toastIcon"></i>
+        <span id="toastMsg">Teks berhasil disalin ke clipboard!</span>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            initScrollProgress();
+            initMobileMenu();
+        });
+
+        function initScrollProgress() {
+            window.addEventListener('scroll', () => {
+                const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = (window.pageYOffset / totalHeight) * 100;
+                document.getElementById('scrollProgress').style.width = progress + '%';
+            });
+        }
+
+        function initMobileMenu() {
+            const btn = document.getElementById('mobileMenuBtn');
+            const drawer = document.getElementById('mobileDrawer');
+            if (btn && drawer) {
+                btn.addEventListener('click', () => drawer.classList.toggle('hidden'));
+            }
+        }
+
+        function showToast(message, isSuccess = true) {
+            const toast = document.getElementById('toast');
+            const msgEl = document.getElementById('toastMsg');
+            const iconEl = document.getElementById('toastIcon');
+
+            msgEl.innerText = message;
+            if (isSuccess) {
+                iconEl.setAttribute('data-lucide', 'check-circle');
+                iconEl.className = 'w-4 h-4 text-emerald-400';
+            } else {
+                iconEl.setAttribute('data-lucide', 'alert-circle');
+                iconEl.className = 'w-4 h-4 text-amber-400';
+            }
+            lucide.createIcons();
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2500);
+        }
+
+        function copyCode(elementId) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+            const text = el.innerText;
+
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showToast('Teks berhasil disalin ke clipboard!');
+                } else {
+                    showToast('Silakan seleksi dan salin manual', false);
+                }
+            } catch (err) {
+                showToast('Gagal menyalin: ' + err.message, false);
+            } finally {
+                document.body.removeChild(textarea);
+            }
+        }
+    </script>
+</body>
+
+</html>
